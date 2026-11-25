@@ -1,11 +1,13 @@
 <header class="header">
   <div class="container header__bar">
-    <a routerLink="/" class="logo" (click)="close()" aria-label="Four Star General Cleaning Service home">
-      <span class="logo__stars" aria-hidden="true">★★★★</span>
-      <span class="logo__text">
-        <strong>Four Star</strong>
-        <small>General Cleaning Service</small>
-      </span>
+    <a routerLink="/" class="logo" (click)="close()">
+      <img
+        class="logo__img"
+        src="/images/fourstar-logo.webp"
+        width="220"
+        height="58"
+        alt="Four Star General Cleaning Service: Commercial Cleaning Company NYC"
+      />
     </a>
 
     <nav class="nav" [class.nav--open]="menuOpen" aria-label="Primary">
@@ -78,10 +80,10 @@
 
       <a routerLink="/reviews" routerLinkActive="is-active" (click)="close()">Reviews</a>
       <a routerLink="/service-area" routerLinkActive="is-active" class="nav__mobile-only" (click)="close()">Service area</a>
-      <a routerLink="/quote" class="btn btn--green nav__mobile-cta" (click)="close()">Get a Free Quote</a>
+      <a routerLink="/quote" class="btn btn--cyan nav__mobile-cta" (click)="close()">Get a Free Quote</a>
     </nav>
 
-    <a routerLink="/quote" class="btn btn--green header__cta">Get a Free Quote</a>
+    <a routerLink="/quote" class="btn btn--cyan header__cta">Get a Free Quote</a>
 
     <button class="menu-btn" type="button" [attr.aria-expanded]="menuOpen" (click)="toggle()">
       <span class="sr-only">Menu</span>

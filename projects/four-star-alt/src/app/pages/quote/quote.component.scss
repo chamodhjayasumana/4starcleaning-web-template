@@ -30,7 +30,7 @@
 
 .progress__bar {
   height: 100%;
-  background: var(--forest);
+  background: var(--cyan);
   border-radius: inherit;
   transition: width 0.25s ease;
 }
@@ -73,7 +73,7 @@
 .edit-link {
   border: 0;
   background: transparent;
-  color: var(--forest);
+  color: var(--cyan);
   font-weight: 700;
   text-decoration: underline;
   cursor: pointer;

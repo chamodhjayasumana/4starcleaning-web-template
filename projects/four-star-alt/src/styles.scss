@@ -1,17 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap');
 
 :root {
-  --forest: #17483b;
-  --forest-deep: #0f3229;
-  --forest-soft: #2a5f50;
-  --warm: #f8f7f2;
-  --pale: #e7f0eb;
-  --charcoal: #192822;
-  --muted: #5a6b63;
-  --line: #d5ddd8;
+  /* Logo-matched brand palette: cyan, navy, gray */
+  --cyan: #2eb7d1;
+  --cyan-soft: #5ac6da;
+  --navy: #2b3e50;
+  --navy-deep: #1a2834;
+  --brand-gray: #a6a6a6;
+  --forest: #2b3e50; /* primary actions (maps existing tokens) */
+  --forest-deep: #1a2834;
+  --forest-soft: #2eb7d1;
+  --warm: #f4f8fa;
+  --pale: #e5f4f8;
+  --charcoal: #2b3e50;
+  --muted: #6b7a86;
+  --line: #d5dee5;
   --paper: #ffffff;
   --danger: #9b2c2c;
-  --focus: rgba(23, 72, 59, 0.35);
+  --focus: rgba(46, 183, 209, 0.45);
   --radius: 16px;
   --radius-sm: 12px;
   --header-h: 72px;
@@ -19,7 +25,7 @@
   --font: 'DM Sans', 'Segoe UI', sans-serif;
   --font-display: 'Instrument Serif', Georgia, serif;
   --max: 1120px;
-  --shadow: 0 14px 36px rgba(25, 40, 34, 0.1);
+  --shadow: 0 14px 36px rgba(43, 62, 80, 0.12);
 }
 
 *,
@@ -100,7 +106,7 @@ p {
 .eyebrow {
   display: inline-block;
   margin-bottom: 0.55rem;
-  color: var(--forest);
+  color: var(--cyan);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -143,23 +149,33 @@ button:focus-visible {
 
 .btn--green,
 .btn--navy {
-  background: var(--forest);
+  background: var(--navy);
   color: #fff;
 }
 
 .btn--green:hover,
 .btn--navy:hover {
-  background: var(--forest-soft);
+  background: #354b60;
+}
+
+.btn--cyan {
+  background: var(--cyan);
+  color: #fff;
+}
+
+.btn--cyan:hover {
+  background: var(--cyan-soft);
 }
 
 .btn--outline {
   background: transparent;
-  border-color: var(--forest);
-  color: var(--forest);
+  border-color: var(--cyan);
+  color: var(--navy);
 }
 
 .btn--outline:hover {
   background: var(--pale);
+  border-color: var(--navy);
 }
 
 .btn--outline-light {
@@ -196,7 +212,7 @@ button:focus-visible {
   padding: 0.25rem 0.65rem;
   border-radius: 999px;
   background: var(--pale);
-  color: var(--forest);
+  color: var(--navy);
   font-size: 0.75rem;
   font-weight: 600;
 }
@@ -263,7 +279,7 @@ button:focus-visible {
   width: 1.15rem;
   height: 1.15rem;
   margin-top: 0.2rem;
-  accent-color: var(--forest);
+  accent-color: var(--cyan);
 }
 
 .sr-only {

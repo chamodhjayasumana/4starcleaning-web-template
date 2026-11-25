@@ -22,7 +22,7 @@ import { COMPANY } from '../../../core/data/company.data';
         grid-template-columns: 1fr 1.25fr;
         min-height: var(--sticky-h);
         background: #fff;
-        box-shadow: 0 -8px 24px rgba(25, 40, 34, 0.12);
+        box-shadow: 0 -8px 24px rgba(43, 62, 80, 0.14);
       }
       .sticky a {
         display: flex;
@@ -32,11 +32,11 @@ import { COMPANY } from '../../../core/data/company.data';
         min-height: var(--sticky-h);
       }
       .sticky__call {
-        background: var(--forest-deep);
+        background: var(--navy-deep);
         color: #fff;
       }
       .sticky__quote {
-        background: var(--forest);
+        background: var(--cyan);
         color: #fff;
       }
       @media (min-width: 768px) {

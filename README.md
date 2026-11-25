@@ -108,7 +108,7 @@ Service names and quote options stay aligned via:
 | **A** (original) | `four-star-demo` | `npm start` → :4200 | `4starcleaning-web-template` |
 | **2** (forest green / warm white) | `four-star-alt` | `npm run start:alt` → :4201 | `4starcleaning-web-template-v2` |
 
-Demo 2 lives in `projects/four-star-alt`: forest green `#17483B` + warm white `#F8F7F2`, DM Sans + Instrument Serif, hero quote starter (building type + ZIP), facility cards, daytime/evening/overnight scheduling, FAQs, and a 2-step quote with “I’m not sure yet” + Edit summary.
+Demo 2 lives in `projects/four-star-alt`: official Four Star logo + logo palette (cyan `#2EB7D1`, navy `#2B3E50`, gray `#A6A6A6`), DM Sans + Instrument Serif, background hero video, quote starter, facility cards, scheduling, FAQs, and a 2-step quote flow.
 
 ## Cloudflare deploy
 

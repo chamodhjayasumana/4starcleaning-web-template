@@ -19,32 +19,12 @@
 .logo {
   display: flex;
   align-items: center;
-  gap: 0.55rem;
-  color: var(--forest);
+  max-width: min(220px, 58vw);
 }
 
-.logo__stars {
-  color: var(--forest);
-  letter-spacing: 0.04em;
-  font-size: 0.9rem;
-}
-
-.logo__text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.05;
-}
-
-.logo__text strong {
-  font-size: 1.1rem;
-  font-weight: 700;
-}
-
-.logo__text small {
-  font-size: 0.62rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--muted);
+.logo__img {
+  width: 100%;
+  height: auto;
 }
 
 .menu-btn {
@@ -52,7 +32,7 @@
   height: 44px;
   border: 0;
   background: transparent;
-  color: var(--forest);
+  color: var(--navy);
   font-size: 1.35rem;
   cursor: pointer;
   justify-self: end;
@@ -108,7 +88,7 @@
 .nav > a:hover,
 .nav > a.is-active {
   background: var(--pale);
-  color: var(--forest);
+  color: var(--cyan);
 }
 
 .dropdown {
@@ -131,7 +111,7 @@
 
 .dropdown a:hover {
   background: var(--pale);
-  color: var(--forest);
+  color: var(--navy);
 }
 
 .nav__mobile-cta {
@@ -148,7 +128,7 @@
 }
 
 .header__meta a {
-  color: var(--forest);
+  color: var(--cyan);
   font-weight: 600;
 }
 
@@ -198,7 +178,7 @@
     padding: 0.55rem;
     background: #fff;
     border: 1px solid var(--line);
-    border-top: 3px solid var(--forest);
+    border-top: 3px solid var(--cyan);
     border-radius: 0 0 12px 12px;
     box-shadow: var(--shadow);
     animation: dropIn 0.16s ease;
