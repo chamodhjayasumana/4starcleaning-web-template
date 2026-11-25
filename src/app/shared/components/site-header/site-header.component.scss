@@ -1,0 +1,148 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(11, 28, 51, 0.96);
+  color: #fff;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(201, 162, 39, 0.25);
+}
+
+.header__top {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.8rem;
+}
+
+.header__top-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 34px;
+  gap: 1rem;
+}
+
+.header__phone {
+  color: var(--gold-400);
+  font-weight: 600;
+}
+
+.header__main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: var(--header-h);
+  position: relative;
+}
+
+.wordmark {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: #fff;
+}
+
+.wordmark__mark {
+  color: var(--gold-400);
+  letter-spacing: 0.08em;
+  font-size: 0.85rem;
+}
+
+.wordmark__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.wordmark__text strong {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.wordmark__text small {
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.78;
+}
+
+.menu-toggle {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: transparent;
+  color: #fff;
+  border-radius: 999px;
+  min-height: 40px;
+  padding: 0 0.9rem;
+  cursor: pointer;
+}
+
+.nav {
+  display: none;
+  flex-direction: column;
+  gap: 0.35rem;
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  right: 0;
+  left: 0;
+  padding: 1rem;
+  background: var(--navy-900);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+.nav--open {
+  display: flex;
+}
+
+.nav a {
+  padding: 0.7rem 0.85rem;
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+.nav a:hover,
+.nav a.is-active {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.nav__cta {
+  background: var(--gold-500) !important;
+  color: var(--navy-950) !important;
+  text-align: center;
+  font-weight: 700 !important;
+  margin-top: 0.35rem;
+}
+
+@media (min-width: 980px) {
+  .menu-toggle {
+    display: none;
+  }
+
+  .nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: static;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    gap: 0.15rem;
+  }
+
+  .nav a {
+    padding: 0.45rem 0.65rem;
+    font-size: 0.86rem;
+  }
+
+  .nav__cta {
+    margin-top: 0;
+    margin-left: 0.4rem;
+    padding-inline: 1rem !important;
+  }
+}

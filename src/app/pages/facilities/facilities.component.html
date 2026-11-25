@@ -1,0 +1,24 @@
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">Facilities we clean</p>
+    <h1>Commercial spaces across New York City</h1>
+    <p class="lead">
+      Banks, retail stores, offices, medical facilities, schools, warehouses, and more—maintained on recurring schedules.
+    </p>
+    <a routerLink="/quote" class="btn btn--navy">Get a Free Quote</a>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="container facility-grid">
+    @for (facility of facilities; track facility.id) {
+      <article class="facility-card">
+        <img [src]="facility.image" [alt]="facility.imageAlt" loading="lazy" width="640" height="420" />
+        <div>
+          <h2>{{ facility.name }}</h2>
+          <p>{{ facility.summary }}</p>
+        </div>
+      </article>
+    }
+  </div>
+</section>

@@ -1,0 +1,32 @@
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">Articles</p>
+    <h1>Notes for commercial facilities</h1>
+    <p class="lead">
+      Placeholder articles for the demo. Replace with approved content when ready.
+    </p>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="container article-list">
+    @for (article of articles; track article.id) {
+      <article class="surface article-row">
+        <div>
+          <p class="badge badge--muted">
+            {{ article.category }}
+            @if (article.placeholder) {
+              · Placeholder
+            }
+          </p>
+          <h2>
+            <a [routerLink]="['/articles', article.slug]">{{ article.title }}</a>
+          </h2>
+          <p>{{ article.excerpt }}</p>
+          <p class="article-row__date">{{ article.publishedAt | date: 'MMMM d, y' }}</p>
+        </div>
+        <a class="btn btn--ghost" [routerLink]="['/articles', article.slug]">Read</a>
+      </article>
+    }
+  </div>
+</section>

@@ -1,0 +1,49 @@
+<footer class="footer">
+  <div class="container footer__grid">
+    <div>
+      <p class="footer__brand">Four Star General Cleaning Service</p>
+      <p class="footer__copy">
+        Recurring commercial cleaning for NYC offices, retail, medical spaces, and more.
+        Minimum one weekly visit of two hours. This site is a private sales concept demo.
+      </p>
+      <app-demo-badge />
+    </div>
+
+    <div>
+      <h3>Services</h3>
+      <ul>
+        @for (service of services; track service.id) {
+          <li>
+            <a [routerLink]="['/services', service.slug]">{{ service.name }}</a>
+          </li>
+        }
+      </ul>
+    </div>
+
+    <div>
+      <h3>Explore</h3>
+      <ul>
+        <li><a routerLink="/facilities">Facilities we clean</a></li>
+        <li><a routerLink="/about">About</a></li>
+        <li><a routerLink="/reviews">Reviews</a></li>
+        <li><a routerLink="/articles">Articles</a></li>
+        <li><a routerLink="/special-offers">Special offers</a></li>
+        <li><a routerLink="/quote">Get a free quote</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3>Contact</h3>
+      <p>{{ company.addressLine1 }}<br />{{ company.addressLine2 }}</p>
+      <p>
+        <a [href]="'tel:' + company.phoneTel">{{ company.phoneDisplay }}</a><br />
+        Office: {{ company.officeHours }}<br />
+        Service: {{ company.serviceHours }}
+      </p>
+    </div>
+  </div>
+
+  <div class="container footer__bottom">
+    <p>© {{ year }} {{ company.name }}. Demo frontend only — no bookings or emails are sent.</p>
+  </div>
+</footer>

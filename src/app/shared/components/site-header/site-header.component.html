@@ -1,0 +1,49 @@
+<header class="header">
+  <div class="header__top">
+    <div class="container header__top-inner">
+      <app-demo-badge />
+      <a class="header__phone" [href]="'tel:' + company.phoneTel">{{ company.phoneDisplay }}</a>
+    </div>
+  </div>
+
+  <div class="container header__main">
+    <a routerLink="/" class="wordmark" (click)="closeMenu()" aria-label="Four Star General Cleaning Service home">
+      <span class="wordmark__mark" aria-hidden="true">★★★★</span>
+      <span class="wordmark__text">
+        <strong>Four Star</strong>
+        <small>General Cleaning Service</small>
+      </span>
+    </a>
+
+    <button
+      class="menu-toggle"
+      type="button"
+      [attr.aria-expanded]="menuOpen"
+      aria-controls="primary-nav"
+      (click)="toggleMenu()"
+    >
+      <span class="sr-only">Menu</span>
+      <span aria-hidden="true">{{ menuOpen ? 'Close' : 'Menu' }}</span>
+    </button>
+
+    <nav id="primary-nav" class="nav" [class.nav--open]="menuOpen" aria-label="Primary">
+      @for (link of links; track link.path) {
+        <a
+          [routerLink]="link.path"
+          routerLinkActive="is-active"
+          (click)="closeMenu()"
+        >
+          {{ link.label }}
+        </a>
+      }
+      <a
+        routerLink="/quote"
+        class="nav__cta"
+        routerLinkActive="is-active"
+        (click)="closeMenu()"
+      >
+        Get a Free Quote
+      </a>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,231 @@
+.hero {
+  position: relative;
+  min-height: min(92vh, 760px);
+  display: flex;
+  align-items: flex-end;
+  background:
+    linear-gradient(120deg, rgba(7, 17, 31, 0.88) 12%, rgba(7, 17, 31, 0.45) 58%, rgba(7, 17, 31, 0.28) 100%),
+    var(--hero-image) center / cover no-repeat;
+  color: #fff;
+  overflow: hidden;
+  animation: heroIn 0.9s ease both;
+}
+
+.hero__veil {
+  position: absolute;
+  inset: auto 0 0;
+  height: 42%;
+  background: linear-gradient(180deg, transparent, rgba(7, 17, 31, 0.55));
+  pointer-events: none;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  padding: 4.5rem 0 3.25rem;
+  max-width: 40rem;
+  margin-left: max(1rem, calc((100% - var(--max)) / 2));
+  margin-right: auto;
+  width: min(100% - 2rem, 40rem);
+}
+
+.hero__brand {
+  font-family: var(--font-display);
+  font-size: clamp(1.55rem, 4vw, 2.15rem);
+  color: #fff;
+  margin: 0 0 0.85rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  animation: fadeUp 0.7s 0.1s ease both;
+}
+
+.hero h1 {
+  color: #fff;
+  font-size: clamp(1.85rem, 5.2vw, 3.1rem);
+  max-width: 14ch;
+  margin-bottom: 0.85rem;
+  animation: fadeUp 0.7s 0.2s ease both;
+}
+
+.hero__support {
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 1.02rem;
+  max-width: 34rem;
+  margin-bottom: 1.4rem;
+  animation: fadeUp 0.7s 0.3s ease both;
+}
+
+.hero .btn-row {
+  animation: fadeUp 0.7s 0.4s ease both;
+}
+
+.services-band h2,
+.process-band h2,
+.facilities-band h2 {
+  font-size: clamp(1.7rem, 3vw, 2.35rem);
+  max-width: 18ch;
+}
+
+.card-grid--services {
+  margin-top: 1.75rem;
+}
+
+@media (min-width: 700px) {
+  .card-grid--services {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1100px) {
+  .card-grid--services {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.facilities-band {
+  background: linear-gradient(135deg, rgba(18, 40, 72, 0.96), rgba(11, 28, 51, 0.98));
+  color: #fff;
+}
+
+.facilities-band h2 {
+  color: #fff;
+}
+
+.facilities-band .lead,
+.facilities-band p {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.facilities-band__inner {
+  display: grid;
+  gap: 2rem;
+}
+
+.facility-chips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.facility-chips li {
+  padding: 0.85rem 1rem;
+  border-left: 3px solid var(--gold-500);
+  background: rgba(255, 255, 255, 0.05);
+  font-weight: 500;
+}
+
+.process-list {
+  list-style: none;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.process-list li {
+  padding: 1.25rem 1.2rem;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.process-list__step {
+  display: inline-block;
+  color: var(--gold-500);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.45rem;
+}
+
+.process-list h3 {
+  font-size: 1.2rem;
+}
+
+.offers-band__panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.75rem;
+  border-radius: var(--radius);
+  background:
+    linear-gradient(135deg, rgba(247, 239, 214, 0.95), rgba(255, 255, 255, 0.92));
+  border: 1px solid rgba(201, 162, 39, 0.35);
+}
+
+.offers-band__meta {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+.cta-band {
+  padding-top: 0;
+}
+
+.cta-band__inner {
+  display: grid;
+  gap: 1.25rem;
+  padding: 2rem 1.4rem;
+  border-radius: calc(var(--radius) + 4px);
+  background:
+    radial-gradient(circle at top right, rgba(201, 162, 39, 0.22), transparent 40%),
+    linear-gradient(135deg, var(--navy-900), var(--navy-800));
+  color: #fff;
+}
+
+.cta-band h2 {
+  color: #fff;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+}
+
+.cta-band p {
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+}
+
+@media (min-width: 800px) {
+  .facilities-band__inner {
+    grid-template-columns: 1.1fr 1fr;
+    align-items: center;
+  }
+
+  .facility-chips {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .process-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .offers-band__panel,
+  .cta-band__inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    grid-template-columns: 1.5fr auto;
+  }
+}
+
+@keyframes heroIn {
+  from {
+    opacity: 0.4;
+    transform: scale(1.02);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

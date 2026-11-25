@@ -1,0 +1,42 @@
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">Special offers</p>
+    <h1>Current demo promotions</h1>
+    <p class="lead">
+      Offers expire automatically. Expired sample promotions are hidden from this list.
+    </p>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="container">
+    @if (offers.length) {
+      <div class="offer-grid">
+        @for (offer of offers; track offer.id) {
+          <article class="surface offer-card">
+            <p class="offer-card__discount">{{ offer.discountLabel }}</p>
+            <h2>{{ offer.title }}</h2>
+            <p>{{ offer.description }}</p>
+            <p class="offer-card__terms">{{ offer.terms }}</p>
+            <p class="offer-card__expiry">
+              Expires {{ offer.expiresAt | date: 'MMMM d, y' }}
+            </p>
+            <a routerLink="/quote" class="btn btn--navy">Get a Free Quote</a>
+          </article>
+        }
+      </div>
+    } @else {
+      <div class="surface empty-offers">
+        <h2>No active offers right now</h2>
+        <p>All sample promotions are expired or inactive. Request a quote for current pricing conversations.</p>
+        <a routerLink="/quote" class="btn btn--navy">Get a Free Quote</a>
+      </div>
+    }
+
+    @if (hiddenCount > 0) {
+      <p class="expiry-note">
+        {{ hiddenCount }} expired sample offer{{ hiddenCount === 1 ? '' : 's' }} hidden automatically for this demo.
+      </p>
+    }
+  </div>
+</section>

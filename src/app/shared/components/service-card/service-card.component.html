@@ -1,0 +1,17 @@
+<article class="service-card">
+  <a class="service-card__media" [routerLink]="['/services', service.slug]">
+    <img [src]="service.image" [alt]="service.imageAlt" loading="lazy" width="640" height="420" />
+  </a>
+  <div class="service-card__body">
+    <h3>
+      <a [routerLink]="['/services', service.slug]">{{ service.name }}</a>
+    </h3>
+    <p>{{ service.summary }}</p>
+    <div class="service-card__actions">
+      <a class="btn btn--ghost" [routerLink]="['/services', service.slug]">Learn more</a>
+      <a class="btn btn--navy" [routerLink]="['/quote']" [queryParams]="{ service: service.id }">
+        Get a Quote
+      </a>
+    </div>
+  </div>
+</article>

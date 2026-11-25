@@ -1,0 +1,95 @@
+<section class="hero" [style.--hero-image]="'url(' + heroImage + ')'">
+  <div class="hero__veil" aria-hidden="true"></div>
+  <div class="container hero__content">
+    <p class="hero__brand">Four Star General Cleaning Service</p>
+    <h1>Commercial cleaning for NYC businesses.</h1>
+    <p class="hero__support">
+      Recurring office, retail, medical, and janitorial programs with insured teams and 24/7 scheduling flexibility.
+    </p>
+    <div class="btn-row">
+      <a routerLink="/quote" class="btn btn--primary">Get a Free Quote</a>
+      <a routerLink="/services" class="btn btn--secondary">Explore Cleaning Services</a>
+    </div>
+  </div>
+</section>
+
+<section class="section services-band">
+  <div class="container">
+    <p class="eyebrow">Services</p>
+    <h2>Commercial cleaning built around your facility</h2>
+    <p class="lead">
+      Choose a program, then open a quote with that service already selected.
+    </p>
+    <div class="card-grid card-grid--services">
+      @for (service of services; track service.id) {
+        <app-service-card [service]="service" />
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section facilities-band">
+  <div class="container facilities-band__inner">
+    <div>
+      <p class="eyebrow">Facilities we clean</p>
+      <h2>From corporate suites to clinics and storefronts</h2>
+      <p class="lead">
+        NYC banks, retail floors, medical offices, schools, warehouses, and more—cleaned on a recurring plan.
+      </p>
+      <a routerLink="/facilities" class="btn btn--navy">See all facilities</a>
+    </div>
+    <ul class="facility-chips">
+      @for (facility of facilities; track facility.id) {
+        <li>{{ facility.name }}</li>
+      }
+    </ul>
+  </div>
+</section>
+
+<section class="section process-band">
+  <div class="container">
+    <p class="eyebrow">How it works</p>
+    <h2>Recurring cleaning in three clear steps</h2>
+    <p class="lead">
+      No one-time residential jobs—just ongoing commercial coverage with a weekly two-hour minimum.
+    </p>
+    <ol class="process-list">
+      @for (item of process; track item.step) {
+        <li>
+          <span class="process-list__step">{{ item.step }}</span>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.text }}</p>
+        </li>
+      }
+    </ol>
+  </div>
+</section>
+
+@if (offers.length) {
+  <section class="section offers-band">
+    <div class="container offers-band__panel">
+      <div>
+        <p class="eyebrow">Special offers</p>
+        <h2>{{ offers[0].discountLabel }} · {{ offers[0].title }}</h2>
+        <p>{{ offers[0].description }}</p>
+        <p class="offers-band__meta">Expires {{ offers[0].expiresAt }} · Demo promotion</p>
+      </div>
+      <a routerLink="/special-offers" class="btn btn--ghost">View offers</a>
+    </div>
+  </section>
+}
+
+<section class="section cta-band">
+  <div class="container cta-band__inner">
+    <div>
+      <h2>Ready for a cleaner commercial space?</h2>
+      <p>
+        Call {{ company.phoneDisplay }} or request a free quote. This demo keeps submissions in memory only.
+      </p>
+    </div>
+    <div class="btn-row">
+      <a [href]="'tel:' + company.phoneTel" class="btn btn--secondary">Call {{ company.phoneDisplay }}</a>
+      <a routerLink="/quote" class="btn btn--primary">Get a Free Quote</a>
+    </div>
+  </div>
+</section>

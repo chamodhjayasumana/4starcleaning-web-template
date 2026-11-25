@@ -1,0 +1,278 @@
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">Get a Free Quote</p>
+    <h1>Tell us about your NYC facility</h1>
+    <p class="lead">
+      Two-step demo form. Nothing is emailed or booked—submissions stay in browser memory for this session.
+    </p>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="container quote-layout">
+    <aside class="quote-aside surface">
+      <p class="eyebrow">Demo tools</p>
+      <h2>Sales walkthrough</h2>
+      <p>
+        Use the sample entry to show validation, coverage preview, walkthrough requests, and confirmation.
+      </p>
+      <button type="button" class="btn btn--ghost btn--block" (click)="loadSample()">
+        Load sample entry
+      </button>
+      <ul class="quote-aside__notes">
+        <li>ZIP coverage results are illustrative sample data.</li>
+        <li>Back navigation keeps your entries.</li>
+        <li>Service can be prefilled from a service page.</li>
+      </ul>
+    </aside>
+
+    <div class="quote-main surface">
+      @if (step < 3) {
+        <div class="steps" aria-label="Quote progress">
+          <div class="steps__item" [class.is-active]="step === 1" [class.is-done]="step > 1">
+            <span>1</span> Facility &amp; schedule
+          </div>
+          <div class="steps__item" [class.is-active]="step === 2">
+            <span>2</span> Contact details
+          </div>
+        </div>
+      }
+
+      @if (step === 1) {
+        <form [formGroup]="stepOneForm" (ngSubmit)="continueToStepTwo()" novalidate>
+          <div class="form-field">
+            <label for="serviceId">Cleaning service</label>
+            <select id="serviceId" formControlName="serviceId">
+              <option value="" disabled>Select a service</option>
+              @for (option of serviceOptions; track option.value) {
+                <option [value]="option.value">{{ option.label }}</option>
+              }
+            </select>
+            @if (invalid('serviceId')) {
+              <span class="field-error">Choose a cleaning service.</span>
+            }
+          </div>
+
+          <div class="form-field">
+            <label for="buildingType">Building type</label>
+            <select id="buildingType" formControlName="buildingType">
+              <option value="" disabled>Select building type</option>
+              @for (option of buildingTypes; track option.value) {
+                <option [value]="option.value">{{ option.label }}</option>
+              }
+            </select>
+            @if (invalid('buildingType')) {
+              <span class="field-error">Choose a building type.</span>
+            }
+          </div>
+
+          <div class="form-field">
+            <label for="zipCode">ZIP code</label>
+            <input
+              id="zipCode"
+              type="text"
+              inputmode="numeric"
+              autocomplete="postal-code"
+              maxlength="5"
+              formControlName="zipCode"
+              placeholder="e.g. 10010"
+            />
+            <span class="hint">Five-digit US ZIP. Coverage preview uses sample demo data only.</span>
+            @if (invalid('zipCode')) {
+              <span class="field-error">
+                @if (stepOneForm.controls.zipCode.hasError('required')) {
+                  Enter a ZIP code.
+                } @else {
+                  Enter a valid 5-digit ZIP code.
+                }
+              </span>
+            }
+          </div>
+
+          @if (coverage) {
+            <div class="coverage" [attr.data-status]="coverage.status" role="status">
+              <strong>Sample coverage preview</strong>
+              <p>
+                {{ coverage.zip }} · {{ coverage.borough }} ·
+                {{ coverage.status === 'covered' ? 'Covered (sample)' : coverage.status === 'limited' ? 'Limited (sample)' : 'Outside sample set' }}
+              </p>
+              <p>{{ coverage.note }}</p>
+            </div>
+          }
+
+          <div class="form-field">
+            <label for="frequency">Recurring cleaning frequency</label>
+            <select id="frequency" formControlName="frequency">
+              <option value="" disabled>Select frequency</option>
+              @for (option of frequencies; track option.value) {
+                <option [value]="option.value">
+                  {{ option.label }}{{ option.hint ? ' — ' + option.hint : '' }}
+                </option>
+              }
+            </select>
+            @if (invalid('frequency')) {
+              <span class="field-error">Choose how often you need cleaning.</span>
+            }
+          </div>
+
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="facilitySize">Facility size <span class="optional">(optional)</span></label>
+              <select id="facilitySize" formControlName="facilitySize">
+                @for (option of facilitySizes; track option.value) {
+                  <option [value]="option.value">{{ option.label }}</option>
+                }
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label for="preferredTime">Preferred cleaning time <span class="optional">(optional)</span></label>
+              <select id="preferredTime" formControlName="preferredTime">
+                @for (option of cleaningTimes; track option.value) {
+                  <option [value]="option.value">{{ option.label }}</option>
+                }
+              </select>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn--navy">Continue to contact details</button>
+        </form>
+      }
+
+      @if (step === 2) {
+        <form [formGroup]="stepTwoForm" (ngSubmit)="submit()" novalidate>
+          <p class="step-summary">
+            Quoting <strong>{{ selectedServiceName }}</strong> in ZIP
+            <strong>{{ stepOneForm.controls.zipCode.value }}</strong>.
+          </p>
+
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="firstName">First name</label>
+              <input id="firstName" type="text" autocomplete="given-name" formControlName="firstName" />
+              @if (invalid('firstName', 'two')) {
+                <span class="field-error">Enter a first name.</span>
+              }
+            </div>
+            <div class="form-field">
+              <label for="lastName">Last name</label>
+              <input id="lastName" type="text" autocomplete="family-name" formControlName="lastName" />
+              @if (invalid('lastName', 'two')) {
+                <span class="field-error">Enter a last name.</span>
+              }
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="company">Company</label>
+            <input id="company" type="text" autocomplete="organization" formControlName="company" />
+            @if (invalid('company', 'two')) {
+              <span class="field-error">Enter a company name.</span>
+            }
+          </div>
+
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="email">Email</label>
+              <input id="email" type="email" autocomplete="email" formControlName="email" />
+              @if (invalid('email', 'two')) {
+                <span class="field-error">Enter a valid email address.</span>
+              }
+            </div>
+            <div class="form-field">
+              <label for="phone">Phone</label>
+              <input id="phone" type="tel" autocomplete="tel" formControlName="phone" />
+              @if (invalid('phone', 'two')) {
+                <span class="field-error">Enter a phone number.</span>
+              }
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="notes">Notes <span class="optional">(optional)</span></label>
+            <textarea
+              id="notes"
+              formControlName="notes"
+              placeholder="Access notes, restroom count, green product preferences…"
+            ></textarea>
+          </div>
+
+          <div class="checkbox-row">
+            <input id="requestWalkthrough" type="checkbox" formControlName="requestWalkthrough" />
+            <label for="requestWalkthrough">
+              Request a walkthrough of the facility before finalizing a plan.
+            </label>
+          </div>
+
+          <div class="btn-row">
+            <button type="button" class="btn btn--ghost" (click)="backToStepOne()">Back</button>
+            <button type="submit" class="btn btn--primary">Submit demo quote</button>
+          </div>
+        </form>
+      }
+
+      @if (step === 3 && confirmation) {
+        <div class="confirmation" role="status" aria-live="polite">
+          <p class="badge">Demo confirmation — not a real booking</p>
+          <h2>Quote request captured in this browser session</h2>
+          <p>
+            Reference <strong>{{ confirmation.referenceId }}</strong>. No email was sent and no production
+            endpoint was called.
+          </p>
+
+          <dl class="confirmation__grid">
+            <div>
+              <dt>Service</dt>
+              <dd>{{ labelFor(serviceOptions, confirmation.serviceId) }}</dd>
+            </div>
+            <div>
+              <dt>Building</dt>
+              <dd>{{ labelFor(buildingTypes, confirmation.buildingType) }}</dd>
+            </div>
+            <div>
+              <dt>ZIP</dt>
+              <dd>{{ confirmation.zipCode }}</dd>
+            </div>
+            <div>
+              <dt>Frequency</dt>
+              <dd>{{ labelFor(frequencies, confirmation.frequency) }}</dd>
+            </div>
+            <div>
+              <dt>Facility size</dt>
+              <dd>{{ labelFor(facilitySizes, confirmation.facilitySize) || 'Not provided' }}</dd>
+            </div>
+            <div>
+              <dt>Preferred time</dt>
+              <dd>{{ labelFor(cleaningTimes, confirmation.preferredTime) || 'No preference' }}</dd>
+            </div>
+            <div>
+              <dt>Contact</dt>
+              <dd>
+                {{ confirmation.firstName }} {{ confirmation.lastName }} · {{ confirmation.company }}
+              </dd>
+            </div>
+            <div>
+              <dt>Email / phone</dt>
+              <dd>{{ confirmation.email }} · {{ confirmation.phone }}</dd>
+            </div>
+            <div>
+              <dt>Walkthrough</dt>
+              <dd>{{ confirmation.requestWalkthrough ? 'Requested' : 'Not requested' }}</dd>
+            </div>
+            @if (confirmation.notes) {
+              <div class="confirmation__notes">
+                <dt>Notes</dt>
+                <dd>{{ confirmation.notes }}</dd>
+              </div>
+            }
+          </dl>
+
+          <div class="btn-row">
+            <button type="button" class="btn btn--ghost" (click)="startAnother()">Start another demo quote</button>
+            <a routerLink="/" class="btn btn--navy">Back to home</a>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

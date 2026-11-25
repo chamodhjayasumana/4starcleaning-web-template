@@ -1,0 +1,78 @@
+.service-card {
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(217, 224, 234, 0.95);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  animation: rise 0.6s ease both;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 44px rgba(7, 17, 31, 0.16);
+}
+
+.service-card__media {
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+}
+
+.service-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.45s ease;
+}
+
+.service-card:hover .service-card__media img {
+  transform: scale(1.04);
+}
+
+.service-card__body {
+  padding: 1.15rem 1.15rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.service-card__body h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.45rem;
+}
+
+.service-card__body h3 a:hover {
+  color: var(--navy-700);
+}
+
+.service-card__body p {
+  flex: 1;
+  font-size: 0.92rem;
+}
+
+.service-card__actions {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 0.85rem;
+}
+
+@media (min-width: 480px) {
+  .service-card__actions {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
