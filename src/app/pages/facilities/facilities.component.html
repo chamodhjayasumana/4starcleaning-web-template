@@ -3,7 +3,7 @@
     <p class="eyebrow">Facilities we clean</p>
     <h1>Commercial spaces across New York City</h1>
     <p class="lead">
-      Banks, retail stores, offices, medical facilities, schools, warehouses, and more—maintained on recurring schedules.
+      Retail, offices, medical, spas, dental, schools, banks, warehouses, and more—each with a demo detail page.
     </p>
     <a routerLink="/quote" class="btn btn--navy">Get a Free Quote</a>
   </div>
@@ -13,10 +13,15 @@
   <div class="container facility-grid">
     @for (facility of facilities; track facility.id) {
       <article class="facility-card">
-        <img [src]="facility.image" [alt]="facility.imageAlt" loading="lazy" width="640" height="420" />
+        <a [routerLink]="['/facilities', facility.slug]" class="facility-card__media">
+          <img [src]="facility.image" [alt]="facility.imageAlt" loading="lazy" width="640" height="420" />
+        </a>
         <div>
-          <h2>{{ facility.name }}</h2>
+          <h2>
+            <a [routerLink]="['/facilities', facility.slug]">{{ facility.name }}</a>
+          </h2>
           <p>{{ facility.summary }}</p>
+          <a class="btn btn--ghost" [routerLink]="['/facilities', facility.slug]">View facility</a>
         </div>
       </article>
     }

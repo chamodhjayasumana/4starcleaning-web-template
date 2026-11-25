@@ -38,16 +38,20 @@ Output is written to `dist/four-star-demo/browser`.
 
 | Route | Page |
 | --- | --- |
-| `/` | Home |
-| `/services` | Services list |
-| `/services/:slug` | Individual service |
-| `/facilities` | Facilities we clean |
+| `/` | Home (services, facilities, awards, process, service area, offers) |
+| `/services` | Core + specialty services |
+| `/services/:slug` | Individual service (office, janitorial, retail, medical, green, COVID-19, carpet, stripping, high dusting, spring) |
+| `/facilities` | Facilities list |
+| `/facilities/:slug` | Facility detail (retail, offices, medical, spas, dental, schools, banks, etc.) |
+| `/service-area` | Borough notes + Manhattan ZIP sample list |
 | `/about` | About |
 | `/reviews` | Reviews (placeholders) |
 | `/articles` | Articles (placeholders) |
 | `/articles/:slug` | Article detail |
 | `/special-offers` | Special offers (expiry-aware) |
-| `/quote` | Two-step free quote form |
+| `/quote` | Two-step free quote + privacy/terms checkbox |
+| `/privacy-policy` | Demo privacy placeholder |
+| `/terms-and-conditions` | Demo terms placeholder |
 
 ### Quote flow
 
@@ -97,20 +101,40 @@ Service names and quote options stay aligned via:
 | `npm run preview` | Build + local Wrangler preview |
 | `npm test` | Unit tests (Karma; optional) |
 
+## Two design demos
+
+| Demo | App | Local | Cloudflare Worker name |
+| --- | --- | --- | --- |
+| **A** (original) | `four-star-demo` | `npm start` → :4200 | `4starcleaning-web-template` |
+| **B** (alternate mockup) | `four-star-alt` | `npm run start:alt` → :4201 | `4starcleaning-web-template-v2` |
+
+Demo B lives in `projects/four-star-alt` with a diagonal navy hero, Poppins typography, yellow progress-bar quote form, and “Spaces we clean” cards — matching the fresh alternate design concept.
+
 ## Cloudflare deploy
 
-This app is a static Angular SPA. `wrangler.toml` points assets at `dist/four-star-demo/browser` with SPA fallback for Angular routes.
-
-In the Cloudflare “Create an app” form:
+### Demo A (existing — keep as-is)
 
 | Field | Value |
 | --- | --- |
 | Build command | `npm run build` |
 | Deploy command | `npx wrangler deploy` |
-| Preview command | `npx wrangler versions upload` |
 
-Or deploy from your machine after `npm install`:
+Config: `wrangler.toml` → `dist/four-star-demo/browser`
+
+### Demo B (new Cloudflare app)
+
+Create a **second** Cloudflare app connected to the same repo:
+
+| Field | Value |
+| --- | --- |
+| Build command | `npm run build:alt` |
+| Deploy command | `npx wrangler deploy -c wrangler.alt.toml` |
+
+Config: `wrangler.alt.toml` → `dist/four-star-alt/browser`
+
+Or from your machine:
 
 ```bash
-npm run deploy
+npm run deploy      # Demo A
+npm run deploy:alt  # Demo B
 ```

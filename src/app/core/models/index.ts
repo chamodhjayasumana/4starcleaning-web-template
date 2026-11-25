@@ -1,3 +1,5 @@
+export type ServiceCategory = 'core' | 'specialty';
+
 export interface CleaningService {
   id: string;
   slug: string;
@@ -10,12 +12,16 @@ export interface CleaningService {
   includes: string[];
   image: string;
   imageAlt: string;
+  category: ServiceCategory;
 }
 
 export interface FacilityType {
   id: string;
+  slug: string;
   name: string;
   summary: string;
+  description: string;
+  highlights: string[];
   image: string;
   imageAlt: string;
 }
@@ -46,7 +52,7 @@ export interface SpecialOffer {
   description: string;
   discountLabel: string;
   terms: string;
-  expiresAt: string; // ISO date YYYY-MM-DD
+  expiresAt: string;
   active: boolean;
 }
 
@@ -78,6 +84,25 @@ export interface ZipCoverage {
   note: string;
 }
 
+export interface AwardBadge {
+  id: string;
+  label: string;
+  detail: string;
+}
+
+export interface BoroughArea {
+  id: string;
+  name: string;
+  summary: string;
+}
+
+export interface LegalPage {
+  slug: string;
+  title: string;
+  updatedAt: string;
+  sections: { heading: string; paragraphs: string[] }[];
+}
+
 export interface QuoteStepOne {
   serviceId: string;
   buildingType: string;
@@ -95,6 +120,7 @@ export interface QuoteStepTwo {
   phone: string;
   notes: string;
   requestWalkthrough: boolean;
+  acceptTerms: boolean;
 }
 
 export interface QuoteSubmission extends QuoteStepOne, QuoteStepTwo {

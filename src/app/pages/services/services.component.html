@@ -3,16 +3,31 @@
     <p class="eyebrow">Services</p>
     <h1>Commercial cleaning programs for NYC businesses</h1>
     <p class="lead">
-      Office, janitorial, retail, medical, and green cleaning—each available as a recurring plan with quote preselection.
+      Core recurring programs plus specialty add-ons from the live site menu—each opens a quote with the service preselected.
     </p>
     <a routerLink="/quote" class="btn btn--navy">Get a Free Quote</a>
   </div>
 </section>
 
 <section class="section section--tight">
-  <div class="container card-grid services-grid">
-    @for (service of services; track service.id) {
-      <app-service-card [service]="service" />
-    }
+  <div class="container">
+    <h2>Core cleaning programs</h2>
+    <div class="card-grid services-grid">
+      @for (service of coreServices; track service.id) {
+        <app-service-card [service]="service" />
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>Specialty &amp; detailed jobs</h2>
+    <p class="lead">COVID-19 support, carpet care, stripping &amp; sealing, high dusting, and seasonal deep cleans.</p>
+    <div class="card-grid services-grid">
+      @for (service of specialtyServices; track service.id) {
+        <app-service-card [service]="service" />
+      }
+    </div>
   </div>
 </section>

@@ -1,0 +1,32 @@
+@if (facility) {
+  <section class="detail-hero" [style.--img]="'url(' + facility.image + ')'">
+    <div class="container detail-hero__content">
+      <p class="eyebrow">Facilities we clean</p>
+      <h1>{{ facility.name }}</h1>
+      <p>{{ facility.summary }}</p>
+      <div class="btn-row">
+        <a routerLink="/quote" class="btn btn--primary">Get a Free Quote</a>
+        <a routerLink="/facilities" class="btn btn--secondary">All facilities</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container detail-grid">
+      <div>
+        <h2>How we support this space</h2>
+        <p>{{ facility.description }}</p>
+        <ul class="check-list">
+          @for (item of facility.highlights; track item) {
+            <li>{{ item }}</li>
+          }
+        </ul>
+      </div>
+      <aside class="surface detail-panel">
+        <h3>Next step</h3>
+        <p>Request a demo quote for a recurring commercial plan. Minimum one weekly visit of two hours.</p>
+        <a routerLink="/quote" class="btn btn--navy btn--block">Get a Free Quote</a>
+      </aside>
+    </div>
+  </section>
+}

@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { AWARDS } from '../../core/data/awards.data';
 import { COMPANY } from '../../core/data/company.data';
 import { FACILITIES } from '../../core/data/facilities.data';
 import { getVisibleOffers } from '../../core/data/offers.data';
-import { SERVICES } from '../../core/data/services.data';
+import { BOROUGHS } from '../../core/data/service-area.data';
+import { getCoreServices } from '../../core/data/services.data';
 import { ServiceCardComponent } from '../../shared/components/service-card/service-card.component';
 
 @Component({
@@ -15,9 +17,11 @@ import { ServiceCardComponent } from '../../shared/components/service-card/servi
 })
 export class HomeComponent {
   readonly company = COMPANY;
-  readonly services = SERVICES;
+  readonly services = getCoreServices();
   readonly facilities = FACILITIES.slice(0, 6);
   readonly offers = getVisibleOffers();
+  readonly awards = AWARDS;
+  readonly boroughs = BOROUGHS;
 
   readonly process = [
     {

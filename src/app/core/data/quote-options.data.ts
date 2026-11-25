@@ -24,11 +24,13 @@ export const BUILDING_TYPES: BuildingTypeOption[] = [
 ];
 
 export const FREQUENCIES: FrequencyOption[] = [
-  { value: 'weekly', label: 'Once per week', hint: 'Minimum program' },
-  { value: '2x-week', label: 'Twice per week' },
-  { value: '3x-week', label: 'Three times per week' },
-  { value: '5x-week', label: 'Five times per week (weekdays)' },
-  { value: 'daily', label: 'Daily / 7 days' },
+  { value: '1x-week', label: '1× per week', hint: 'Minimum program' },
+  { value: '2x-week', label: '2× per week' },
+  { value: '3x-week', label: '3× per week' },
+  { value: '4x-week', label: '4× per week' },
+  { value: '5x-week', label: '5× per week' },
+  { value: '6x-week', label: '6× per week' },
+  { value: '7x-week', label: '7× per week' },
   { value: 'monthly', label: 'Monthly recurring' },
 ];
 
@@ -68,5 +70,6 @@ export const DEMO_SAMPLE_QUOTE = {
     phone: '(212) 555-0148',
     notes: 'Need evening cleaning for a 7th-floor suite; freight elevator access after 6 PM.',
     requestWalkthrough: true,
+    acceptTerms: true,
   },
 };

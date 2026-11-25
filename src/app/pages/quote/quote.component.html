@@ -204,6 +204,19 @@
             </label>
           </div>
 
+          <div class="checkbox-row">
+            <input id="acceptTerms" type="checkbox" formControlName="acceptTerms" />
+            <label for="acceptTerms">
+              I have read the demo
+              <a routerLink="/privacy-policy">Privacy Policy</a>
+              and
+              <a routerLink="/terms-and-conditions">Terms &amp; Conditions</a>.
+            </label>
+          </div>
+          @if (invalid('acceptTerms', 'two')) {
+            <span class="field-error">Accept the demo privacy policy and terms to continue.</span>
+          }
+
           <div class="btn-row">
             <button type="button" class="btn btn--ghost" (click)="backToStepOne()">Back</button>
             <button type="submit" class="btn btn--primary">Submit demo quote</button>

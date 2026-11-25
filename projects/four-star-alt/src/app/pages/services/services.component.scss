@@ -1,0 +1,42 @@
+.service-card {
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.service-card__media {
+  display: block;
+}
+
+.service-card__media img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.service-card__body {
+  padding: 1.15rem 1.2rem 1.35rem;
+}
+
+.service-card__body h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0.45rem;
+}
+
+.service-card__body h2 a:hover {
+  color: var(--navy-soft);
+}
+
+@media (min-width: 700px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1100px) {
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

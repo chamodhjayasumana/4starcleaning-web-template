@@ -1,0 +1,7 @@
+name = "4starcleaning-web-template-v2"
+compatibility_date = "2025-11-01"
+
+# Alternate design (Demo B) — keeps the original Worker untouched
+[assets]
+directory = "./dist/four-star-alt/browser"
+not_found_handling = "single-page-application"

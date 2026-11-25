@@ -68,6 +68,7 @@ export class QuoteComponent implements OnInit {
     phone: ['', [Validators.required, Validators.minLength(7)]],
     notes: [''],
     requestWalkthrough: [false],
+    acceptTerms: [false, Validators.requiredTrue],
   });
 
 
@@ -165,6 +166,7 @@ export class QuoteComponent implements OnInit {
       phone: '',
       notes: '',
       requestWalkthrough: false,
+      acceptTerms: false,
     });
     this.coverage = null;
     this.confirmation = null;

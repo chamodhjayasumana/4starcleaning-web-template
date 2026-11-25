@@ -1,0 +1,34 @@
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">Service area</p>
+    <h1>NYC commercial coverage</h1>
+    <p class="lead">
+      Illustrative borough notes and a Manhattan ZIP sample list for demo walkthroughs—not a live dispatch map.
+    </p>
+    <a routerLink="/quote" class="btn btn--navy">Get a Free Quote</a>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="container borough-grid">
+    @for (borough of boroughs; track borough.id) {
+      <article class="surface borough-card">
+        <h2>{{ borough.name }}</h2>
+        <p>{{ borough.summary }}</p>
+      </article>
+    }
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>Manhattan ZIP sample list</h2>
+    <p class="lead">Demo sample ZIPs in the 10001–10040 style used on the live site for sales conversations.</p>
+    <ul class="zip-grid">
+      @for (zip of zips; track zip) {
+        <li>{{ zip }}</li>
+      }
+    </ul>
+    <p class="hint">Enter any of these on the quote form to see the sample coverage preview.</p>
+  </div>
+</section>

@@ -1,0 +1,146 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+}
+
+.header__bar {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: var(--header-h);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--navy);
+}
+
+.logo__stars {
+  color: var(--yellow);
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.logo__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+
+.logo__text strong {
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.logo__text small {
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--navy-soft);
+}
+
+.menu-btn {
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: transparent;
+  color: var(--navy);
+  font-size: 1.4rem;
+  cursor: pointer;
+  justify-self: end;
+}
+
+.header__cta {
+  display: none;
+}
+
+.nav {
+  display: none;
+  position: absolute;
+  top: calc(var(--header-h) + 28px);
+  left: 1rem;
+  right: 1rem;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
+}
+
+.nav--open {
+  display: flex;
+}
+
+.nav a {
+  padding: 0.7rem 0.8rem;
+  border-radius: 10px;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.nav a.is-active,
+.nav a:hover {
+  background: #f3f6fb;
+}
+
+.nav__mobile-cta {
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+.header__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.45rem;
+  font-size: 0.78rem;
+}
+
+.header__meta a {
+  color: var(--navy);
+  font-weight: 600;
+}
+
+@media (min-width: 980px) {
+  .header__bar {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .menu-btn,
+  .nav__mobile-only,
+  .nav__mobile-cta {
+    display: none !important;
+  }
+
+  .nav {
+    display: flex;
+    position: static;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.15rem;
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+    background: transparent;
+  }
+
+  .nav a {
+    padding: 0.45rem 0.85rem;
+    font-size: 0.92rem;
+  }
+
+  .header__cta {
+    display: inline-flex;
+  }
+}

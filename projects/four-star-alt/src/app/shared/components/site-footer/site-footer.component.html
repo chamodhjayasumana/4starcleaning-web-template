@@ -1,0 +1,45 @@
+<footer class="footer">
+  <div class="container footer__grid">
+    <div>
+      <div class="footer__brand">
+        <span class="stars" aria-hidden="true">★★★★</span>
+        <div>
+          <strong>FOUR STAR</strong>
+          <small>GENERAL CLEANING SERVICE</small>
+        </div>
+      </div>
+      <p>Recurring commercial cleaning for NYC businesses. Alternate design concept demo.</p>
+      <app-demo-badge [dark]="true" />
+    </div>
+    <div>
+      <h3>Services</h3>
+      <ul>
+        @for (s of services; track s.id) {
+          <li><a [routerLink]="['/services', s.slug]">{{ s.name }}</a></li>
+        }
+      </ul>
+    </div>
+    <div>
+      <h3>Explore</h3>
+      <ul>
+        <li><a routerLink="/facilities">Facilities</a></li>
+        <li><a routerLink="/service-area">Service area</a></li>
+        <li><a routerLink="/about">About</a></li>
+        <li><a routerLink="/reviews">Reviews</a></li>
+        <li><a routerLink="/articles">Articles</a></li>
+        <li><a routerLink="/special-offers">Offers</a></li>
+        <li><a routerLink="/quote">Get a Free Quote</a></li>
+        <li><a routerLink="/privacy-policy">Privacy Policy</a></li>
+        <li><a routerLink="/terms-and-conditions">Terms &amp; Conditions</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Contact</h3>
+      <p>{{ company.addressLine1 }}<br />{{ company.addressLine2 }}</p>
+      <p><a [href]="'tel:' + company.phoneTel">{{ company.phoneDisplay }}</a></p>
+    </div>
+  </div>
+  <div class="container footer__bottom">
+    <p>© {{ year }} {{ company.name }}. Demo frontend only — no bookings or emails are sent.</p>
+  </div>
+</footer>

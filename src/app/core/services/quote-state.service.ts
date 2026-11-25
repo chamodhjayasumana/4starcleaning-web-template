@@ -18,6 +18,7 @@ const EMPTY_STEP_TWO: QuoteStepTwo = {
   phone: '',
   notes: '',
   requestWalkthrough: false,
+  acceptTerms: false,
 };
 
 @Injectable({ providedIn: 'root' })

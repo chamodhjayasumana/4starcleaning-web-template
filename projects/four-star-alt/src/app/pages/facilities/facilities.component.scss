@@ -1,0 +1,38 @@
+.facility-grid {
+  display: grid;
+  gap: 1.15rem;
+}
+
+.facility-card {
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.facility-card img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.facility-card div {
+  padding: 1.1rem 1.15rem 1.25rem;
+}
+
+.facility-card h2 {
+  font-size: 1.2rem;
+}
+
+@media (min-width: 700px) {
+  .facility-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1000px) {
+  .facility-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

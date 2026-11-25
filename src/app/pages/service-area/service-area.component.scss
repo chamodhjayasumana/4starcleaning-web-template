@@ -1,0 +1,56 @@
+.borough-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.borough-card {
+  padding: 1.25rem;
+}
+
+.borough-card h2 {
+  font-size: 1.25rem;
+}
+
+.zip-grid {
+  list-style: none;
+  margin: 1.25rem 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.zip-grid li {
+  text-align: center;
+  padding: 0.55rem 0.35rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid var(--line);
+  font-weight: 600;
+  color: var(--navy-900);
+  font-size: 0.9rem;
+}
+
+.hint {
+  font-size: 0.88rem;
+}
+
+@media (min-width: 700px) {
+  .borough-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .zip-grid {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1000px) {
+  .borough-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .zip-grid {
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+  }
+}

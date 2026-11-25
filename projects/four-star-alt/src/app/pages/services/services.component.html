@@ -1,0 +1,65 @@
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">Services</p>
+    <h1>Commercial cleaning programs for NYC businesses</h1>
+    <p class="lead">
+      Office, janitorial, retail, medical, and green cleaning—each available as a recurring plan with quote preselection.
+    </p>
+    <a routerLink="/quote" class="btn btn--navy">Get a Free Quote</a>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="container">
+    <h2>Core cleaning programs</h2>
+    <div class="card-grid services-grid">
+      @for (service of coreServices; track service.id) {
+        <article class="service-card">
+          <a class="service-card__media" [routerLink]="['/services', service.slug]">
+            <img [src]="service.image" [alt]="service.imageAlt" loading="lazy" width="640" height="420" />
+          </a>
+          <div class="service-card__body">
+            <h2>
+              <a [routerLink]="['/services', service.slug]">{{ service.name }}</a>
+            </h2>
+            <p>{{ service.summary }}</p>
+            <div class="btn-row">
+              <a class="btn btn--ghost" [routerLink]="['/services', service.slug]">Learn more</a>
+              <a class="btn btn--navy" [routerLink]="['/quote']" [queryParams]="{ service: service.id }">
+                Get a Quote
+              </a>
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>Specialty &amp; detailed jobs</h2>
+    <p class="lead">COVID-19 support, carpet care, stripping &amp; sealing, high dusting, and seasonal deep cleans.</p>
+    <div class="card-grid services-grid">
+      @for (service of specialtyServices; track service.id) {
+        <article class="service-card">
+          <a class="service-card__media" [routerLink]="['/services', service.slug]">
+            <img [src]="service.image" [alt]="service.imageAlt" loading="lazy" width="640" height="420" />
+          </a>
+          <div class="service-card__body">
+            <h2>
+              <a [routerLink]="['/services', service.slug]">{{ service.name }}</a>
+            </h2>
+            <p>{{ service.summary }}</p>
+            <div class="btn-row">
+              <a class="btn btn--ghost" [routerLink]="['/services', service.slug]">Learn more</a>
+              <a class="btn btn--navy" [routerLink]="['/quote']" [queryParams]="{ service: service.id }">
+                Get a Quote
+              </a>
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>

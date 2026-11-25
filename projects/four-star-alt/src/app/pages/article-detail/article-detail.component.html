@@ -1,0 +1,23 @@
+@if (article) {
+  <section class="page-hero">
+    <div class="container narrow">
+      <p class="badge badge--muted">
+        {{ article.category }}
+        @if (article.placeholder) {
+          · Placeholder
+        }
+      </p>
+      <h1>{{ article.title }}</h1>
+      <p class="lead">{{ article.publishedAt | date: 'MMMM d, y' }}</p>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container narrow article-body">
+      @for (paragraph of article.body; track paragraph) {
+        <p>{{ paragraph }}</p>
+      }
+      <a routerLink="/articles" class="btn btn--ghost">Back to articles</a>
+    </div>
+  </section>
+}

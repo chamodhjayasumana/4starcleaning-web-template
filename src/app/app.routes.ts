@@ -27,6 +27,19 @@ export const routes: Routes = [
     title: 'Facilities We Clean · Four Star Demo',
   },
   {
+    path: 'facilities/:slug',
+    loadComponent: () =>
+      import('./pages/facility-detail/facility-detail.component').then(
+        (m) => m.FacilityDetailComponent
+      ),
+  },
+  {
+    path: 'service-area',
+    loadComponent: () =>
+      import('./pages/service-area/service-area.component').then((m) => m.ServiceAreaComponent),
+    title: 'Service Area · Four Star Demo',
+  },
+  {
     path: 'about',
     loadComponent: () =>
       import('./pages/about/about.component').then((m) => m.AboutComponent),
@@ -62,6 +75,18 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/quote/quote.component').then((m) => m.QuoteComponent),
     title: 'Get a Free Quote · Four Star Demo',
+  },
+  {
+    path: 'privacy-policy',
+    loadComponent: () =>
+      import('./pages/legal/legal.component').then((m) => m.LegalComponent),
+    data: { slug: 'privacy-policy' },
+  },
+  {
+    path: 'terms-and-conditions',
+    loadComponent: () =>
+      import('./pages/legal/legal.component').then((m) => m.LegalComponent),
+    data: { slug: 'terms-and-conditions' },
   },
   { path: '**', redirectTo: '' },
 ];

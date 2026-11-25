@@ -40,9 +40,26 @@
     </div>
     <ul class="facility-chips">
       @for (facility of facilities; track facility.id) {
-        <li>{{ facility.name }}</li>
+        <li>
+          <a [routerLink]="['/facilities', facility.slug]">{{ facility.name }}</a>
+        </li>
       }
     </ul>
+  </div>
+</section>
+
+<section class="section awards-band">
+  <div class="container">
+    <p class="eyebrow">Recognition</p>
+    <h2>Industry mentions (demo placeholders)</h2>
+    <div class="awards-grid">
+      @for (award of awards; track award.id) {
+        <article class="award-card">
+          <strong>{{ award.label }}</strong>
+          <p>{{ award.detail }}</p>
+        </article>
+      }
+    </div>
   </div>
 </section>
 
@@ -62,6 +79,24 @@
         </li>
       }
     </ol>
+  </div>
+</section>
+
+<section class="section area-band">
+  <div class="container area-band__inner">
+    <div>
+      <p class="eyebrow">Service area</p>
+      <h2>Manhattan and greater NYC</h2>
+      <p class="lead">
+        Borough notes plus a Manhattan ZIP sample list for quote coverage demos.
+      </p>
+      <a routerLink="/service-area" class="btn btn--navy">View service area</a>
+    </div>
+    <ul class="borough-list">
+      @for (borough of boroughs; track borough.id) {
+        <li><strong>{{ borough.name }}</strong> — {{ borough.summary }}</li>
+      }
+    </ul>
   </div>
 </section>
 

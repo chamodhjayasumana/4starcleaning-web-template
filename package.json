@@ -3,12 +3,17 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --host 127.0.0.1 --port 4200",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
+    "start": "ng serve four-star-demo --host 127.0.0.1 --port 4200",
+    "start:alt": "ng serve four-star-alt --host 127.0.0.1 --port 4201",
+    "build": "ng build four-star-demo",
+    "build:alt": "ng build four-star-alt",
+    "build:all": "npm run build && npm run build:alt",
+    "watch": "ng build four-star-demo --watch --configuration development",
+    "test": "ng test four-star-demo",
     "deploy": "npm run build && wrangler deploy",
-    "preview": "npm run build && wrangler dev"
+    "deploy:alt": "npm run build:alt && wrangler deploy -c wrangler.alt.toml",
+    "preview": "npm run build && wrangler dev",
+    "preview:alt": "npm run build:alt && wrangler dev -c wrangler.alt.toml"
   },
   "private": true,
   "dependencies": {

@@ -1,0 +1,128 @@
+<section class="hero">
+  <div class="hero__panel">
+    <div class="hero__copy">
+      <h1>Commercial cleaning for NYC businesses.</h1>
+      <div class="btn-row">
+        <a routerLink="/quote" class="btn btn--yellow">Get a Free Quote</a>
+        <a routerLink="/services" class="btn btn--outline-light">Explore Services</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero__media">
+    <img [src]="heroImage" alt="Professional cleaner maintaining a NYC office desk" width="1400" height="900" />
+  </div>
+</section>
+
+<section class="section services-band">
+  <div class="container">
+    <p class="eyebrow">Services</p>
+    <h2>Cleaning programs</h2>
+    <p class="lead">Open a quote with your service already selected.</p>
+    <div class="service-grid">
+      @for (service of services; track service.id) {
+        <article class="service-tile">
+          <h3>{{ service.name }}</h3>
+          <p>{{ service.tagline }}</p>
+          <div class="btn-row">
+            <a class="btn btn--ghost" [routerLink]="['/services', service.slug]">Learn more</a>
+            <a class="btn btn--navy" [routerLink]="['/quote']" [queryParams]="{ service: service.id }">
+              Get a Quote
+            </a>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section facilities-band">
+  <div class="container facilities-band__inner">
+    <div>
+      <p class="eyebrow">Facilities we clean</p>
+      <h2>From corporate suites to clinics and storefronts</h2>
+      <p class="lead">
+        NYC banks, retail floors, medical offices, schools, warehouses, and more—cleaned on a recurring plan.
+      </p>
+      <a routerLink="/facilities" class="btn btn--yellow">See all facilities</a>
+    </div>
+    <ul class="facility-chips">
+      @for (facility of facilities; track facility.id) {
+        <li>
+          <a [routerLink]="['/facilities', facility.slug]">{{ facility.name }}</a>
+        </li>
+      }
+    </ul>
+  </div>
+</section>
+
+<section class="section awards-band">
+  <div class="container">
+    <p class="eyebrow">Recognition</p>
+    <h2>Industry mentions (demo placeholders)</h2>
+    <div class="awards-grid">
+      @for (award of awards; track award.id) {
+        <article class="award-card">
+          <strong>{{ award.label }}</strong>
+          <p>{{ award.detail }}</p>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section process">
+  <div class="container">
+    <h2>How recurring cleaning works</h2>
+    <ol class="process__list">
+      @for (step of steps; track step.title; let i = $index) {
+        <li>
+          <span>{{ i + 1 }}</span>
+          <h3>{{ step.title }}</h3>
+          <p>{{ step.text }}</p>
+        </li>
+      }
+    </ol>
+  </div>
+</section>
+
+<section class="section area-band">
+  <div class="container area-band__inner">
+    <div>
+      <p class="eyebrow">Service area</p>
+      <h2>Manhattan and greater NYC</h2>
+      <p class="lead">
+        Borough notes plus a Manhattan ZIP sample list for quote coverage demos.
+      </p>
+      <a routerLink="/service-area" class="btn btn--navy">View service area</a>
+    </div>
+    <ul class="borough-list">
+      @for (borough of boroughs; track borough.id) {
+        <li><strong>{{ borough.name }}</strong> — {{ borough.summary }}</li>
+      }
+    </ul>
+  </div>
+</section>
+
+@if (offers.length) {
+  <section class="section offer">
+    <div class="container offer__panel">
+      <div>
+        <p class="eyebrow">Special offer</p>
+        <h2>{{ offers[0].discountLabel }} · {{ offers[0].title }}</h2>
+        <p>{{ offers[0].description }}</p>
+      </div>
+      <a routerLink="/special-offers" class="btn btn--yellow">View offers</a>
+    </div>
+  </section>
+}
+
+<section class="section cta">
+  <div class="container cta__panel">
+    <h2>Ready for a cleaner commercial space?</h2>
+    <p>Call {{ company.phoneDisplay }} or request a free quote. Demo submissions stay in memory only.</p>
+    <div class="btn-row">
+      <a [href]="'tel:' + company.phoneTel" class="btn btn--outline-light">Call</a>
+      <a routerLink="/quote" class="btn btn--yellow">Get a Free Quote</a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,40 @@
+.review-grid {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.review-card {
+  padding: 1.3rem;
+}
+
+.review-card__stars {
+  margin: 0.75rem 0 0.65rem;
+  letter-spacing: 0.08em;
+  color: #d5dde8;
+}
+
+.review-card__stars .is-on {
+  color: var(--yellow);
+}
+
+.review-card blockquote {
+  margin: 0 0 1rem;
+  color: var(--ink);
+  font-size: 1.1rem;
+  line-height: 1.45;
+}
+
+.review-card__meta {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.review-cta {
+  margin-top: 2rem;
+}
+
+@media (min-width: 800px) {
+  .review-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

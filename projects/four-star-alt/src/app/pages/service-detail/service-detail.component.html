@@ -1,0 +1,62 @@
+@if (service) {
+  <section class="detail-hero" [style.--img]="'url(' + service.image + ')'">
+    <div class="detail-hero__veil"></div>
+    <div class="container detail-hero__content">
+      <p class="eyebrow">{{ service.shortName }} cleaning</p>
+      <h1>{{ service.name }}</h1>
+      <p>{{ service.tagline }}</p>
+      <div class="btn-row">
+        <a
+          class="btn btn--yellow"
+          [routerLink]="['/quote']"
+          [queryParams]="{ service: service.id }"
+        >
+          Get a Free Quote
+        </a>
+        <a routerLink="/services" class="btn btn--ghost">All services</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container detail-grid">
+      <div>
+        <h2>Program overview</h2>
+        <p>{{ service.description }}</p>
+        <ul class="check-list">
+          @for (item of service.highlights; track item) {
+            <li>{{ item }}</li>
+          }
+        </ul>
+      </div>
+      <aside class="surface detail-panel">
+        <h3>Typically includes</h3>
+        <ul>
+          @for (item of service.includes; track item) {
+            <li>{{ item }}</li>
+          }
+        </ul>
+        <a
+          class="btn btn--navy btn--block"
+          [routerLink]="['/quote']"
+          [queryParams]="{ service: service.id }"
+        >
+          Quote this service
+        </a>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section section--tight related">
+    <div class="container">
+      <h2>Other programs</h2>
+      <div class="related__links">
+        @for (item of related; track item.id) {
+          @if (item.id !== service.id) {
+            <a [routerLink]="['/services', item.slug]">{{ item.name }}</a>
+          }
+        }
+      </div>
+    </div>
+  </section>
+}

@@ -1,0 +1,195 @@
+<section class="quote-page">
+  <div class="container quote-page__inner">
+    @if (step < 3) {
+      <h1>Get a Free Quote</h1>
+      <p class="step-label">Step {{ step }} of 2</p>
+      <div class="progress" aria-hidden="true">
+        <div class="progress__bar" [style.width.%]="step === 1 ? 50 : 100"></div>
+      </div>
+    }
+
+    <aside class="demo-tools">
+      <button type="button" class="btn btn--ghost btn--block" (click)="loadSample()">
+        Load sample entry
+      </button>
+      <p>Demo only — ZIP coverage is sample data. Nothing is emailed.</p>
+    </aside>
+
+    @if (step === 1) {
+      <form class="quote-form" [formGroup]="stepOneForm" (ngSubmit)="continueToStepTwo()" novalidate>
+        <h2>Your facility</h2>
+
+        <div class="form-field">
+          <label for="serviceId">Service</label>
+          <select id="serviceId" formControlName="serviceId">
+            <option value="" disabled>Select a service</option>
+            @for (option of serviceOptions; track option.value) {
+              <option [value]="option.value">{{ option.label }}</option>
+            }
+          </select>
+          @if (invalid('serviceId')) {
+            <span class="field-error">Choose a cleaning service.</span>
+          }
+        </div>
+
+        <div class="form-field">
+          <label for="buildingType">Building type</label>
+          <select id="buildingType" formControlName="buildingType">
+            <option value="" disabled>Select building type</option>
+            @for (option of buildingTypes; track option.value) {
+              <option [value]="option.value">{{ option.label }}</option>
+            }
+          </select>
+          @if (invalid('buildingType')) {
+            <span class="field-error">Choose a building type.</span>
+          }
+        </div>
+
+        <div class="form-field">
+          <label for="zipCode">ZIP code</label>
+          <input
+            id="zipCode"
+            type="text"
+            inputmode="numeric"
+            maxlength="5"
+            formControlName="zipCode"
+            placeholder="Enter ZIP code"
+            autocomplete="postal-code"
+          />
+          @if (invalid('zipCode')) {
+            <span class="field-error">Enter a valid 5-digit ZIP code.</span>
+          }
+        </div>
+
+        @if (coverage) {
+          <div class="coverage" [attr.data-status]="coverage.status" role="status">
+            <strong>Sample coverage preview</strong>
+            <p>{{ coverage.zip }} · {{ coverage.borough }} · {{ coverage.note }}</p>
+          </div>
+        }
+
+        <div class="form-field">
+          <label for="frequency">Cleaning frequency</label>
+          <select id="frequency" formControlName="frequency">
+            <option value="" disabled>Select cleaning frequency</option>
+            @for (option of frequencies; track option.value) {
+              <option [value]="option.value">{{ option.label }}</option>
+            }
+          </select>
+          @if (invalid('frequency')) {
+            <span class="field-error">Choose a frequency.</span>
+          }
+        </div>
+
+        <div class="form-field">
+          <label for="facilitySize">Facility size <span class="optional">(optional)</span></label>
+          <select id="facilitySize" formControlName="facilitySize">
+            @for (option of facilitySizes; track option.value) {
+              <option [value]="option.value">{{ option.label }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="preferredTime">Preferred cleaning time <span class="optional">(optional)</span></label>
+          <select id="preferredTime" formControlName="preferredTime">
+            @for (option of cleaningTimes; track option.value) {
+              <option [value]="option.value">{{ option.label }}</option>
+            }
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn--yellow btn--block">Continue</button>
+      </form>
+    }
+
+    @if (step === 2) {
+      <form class="quote-form" [formGroup]="stepTwoForm" (ngSubmit)="submit()" novalidate>
+        <h2>Your contact details</h2>
+        <p class="summary">Quoting <strong>{{ selectedServiceName }}</strong> · ZIP {{ stepOneForm.controls.zipCode.value }}</p>
+
+        <div class="form-field">
+          <label for="firstName">First name</label>
+          <input id="firstName" formControlName="firstName" autocomplete="given-name" />
+          @if (invalid('firstName', 'two')) {
+            <span class="field-error">Enter a first name.</span>
+          }
+        </div>
+        <div class="form-field">
+          <label for="lastName">Last name</label>
+          <input id="lastName" formControlName="lastName" autocomplete="family-name" />
+          @if (invalid('lastName', 'two')) {
+            <span class="field-error">Enter a last name.</span>
+          }
+        </div>
+        <div class="form-field">
+          <label for="company">Company</label>
+          <input id="company" formControlName="company" autocomplete="organization" />
+          @if (invalid('company', 'two')) {
+            <span class="field-error">Enter a company name.</span>
+          }
+        </div>
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input id="email" type="email" formControlName="email" autocomplete="email" />
+          @if (invalid('email', 'two')) {
+            <span class="field-error">Enter a valid email.</span>
+          }
+        </div>
+        <div class="form-field">
+          <label for="phone">Phone</label>
+          <input id="phone" type="tel" formControlName="phone" autocomplete="tel" />
+          @if (invalid('phone', 'two')) {
+            <span class="field-error">Enter a phone number.</span>
+          }
+        </div>
+        <div class="form-field">
+          <label for="notes">Notes <span class="optional">(optional)</span></label>
+          <textarea id="notes" formControlName="notes"></textarea>
+        </div>
+        <div class="checkbox-row">
+          <input id="requestWalkthrough" type="checkbox" formControlName="requestWalkthrough" />
+          <label for="requestWalkthrough">Request a walkthrough</label>
+        </div>
+
+        <div class="checkbox-row">
+          <input id="acceptTerms" type="checkbox" formControlName="acceptTerms" />
+          <label for="acceptTerms">
+            I have read the demo
+            <a routerLink="/privacy-policy">Privacy Policy</a>
+            and
+            <a routerLink="/terms-and-conditions">Terms &amp; Conditions</a>.
+          </label>
+        </div>
+        @if (invalid('acceptTerms', 'two')) {
+          <span class="field-error">Accept the demo privacy policy and terms to continue.</span>
+        }
+
+        <div class="btn-row">
+          <button type="button" class="btn btn--ghost" (click)="backToStepOne()">Back</button>
+          <button type="submit" class="btn btn--yellow">Submit demo quote</button>
+        </div>
+      </form>
+    }
+
+    @if (step === 3 && confirmation) {
+      <div class="confirmation" role="status">
+        <p class="badge">Demo confirmation — not a real booking</p>
+        <h1>Quote captured in this browser session</h1>
+        <p>Reference <strong>{{ confirmation.referenceId }}</strong>. No email was sent.</p>
+        <dl>
+          <div><dt>Service</dt><dd>{{ labelFor(serviceOptions, confirmation.serviceId) }}</dd></div>
+          <div><dt>Building</dt><dd>{{ labelFor(buildingTypes, confirmation.buildingType) }}</dd></div>
+          <div><dt>ZIP</dt><dd>{{ confirmation.zipCode }}</dd></div>
+          <div><dt>Frequency</dt><dd>{{ labelFor(frequencies, confirmation.frequency) }}</dd></div>
+          <div><dt>Contact</dt><dd>{{ confirmation.firstName }} {{ confirmation.lastName }} · {{ confirmation.company }}</dd></div>
+          <div><dt>Walkthrough</dt><dd>{{ confirmation.requestWalkthrough ? 'Requested' : 'Not requested' }}</dd></div>
+        </dl>
+        <div class="btn-row">
+          <button type="button" class="btn btn--ghost" (click)="startAnother()">Start another</button>
+          <a routerLink="/" class="btn btn--navy">Back to home</a>
+        </div>
+      </div>
+    }
+  </div>
+</section>

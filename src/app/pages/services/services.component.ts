@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { SERVICES } from '../../core/data/services.data';
+import { getCoreServices, getSpecialtyServices } from '../../core/data/services.data';
 import { ServiceCardComponent } from '../../shared/components/service-card/service-card.component';
 
 @Component({
@@ -11,5 +11,6 @@ import { ServiceCardComponent } from '../../shared/components/service-card/servi
   styleUrl: './services.component.scss',
 })
 export class ServicesComponent {
-  readonly services = SERVICES;
+  readonly coreServices = getCoreServices();
+  readonly specialtyServices = getSpecialtyServices();
 }

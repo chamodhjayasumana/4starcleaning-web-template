@@ -17,6 +17,7 @@ export class SiteHeaderComponent {
   readonly links = [
     { path: '/services', label: 'Services' },
     { path: '/facilities', label: 'Facilities' },
+    { path: '/service-area', label: 'Service area' },
     { path: '/about', label: 'About' },
     { path: '/reviews', label: 'Reviews' },
     { path: '/articles', label: 'Articles' },

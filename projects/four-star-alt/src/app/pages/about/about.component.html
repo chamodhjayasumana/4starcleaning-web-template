@@ -1,0 +1,55 @@
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">About</p>
+    <h1>NYC commercial cleaning with a long track record</h1>
+    <p class="lead">
+      {{ company.name }} is a privately owned commercial cleaning company serving offices, retail, medical spaces, and other facilities across the New York Tri-State area.
+    </p>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="container about-layout">
+    <div class="about-copy">
+      <h2>Built for recurring commercial work</h2>
+      <p>
+        For more than {{ company.yearsExperience }} years, businesses across Manhattan, Brooklyn, Queens, and the Bronx have relied on Four Star for professional, ongoing cleaning—not one-time residential jobs. Programs emphasize personalization: daily, weekly, or monthly service shaped around each facility.
+      </p>
+      <p>
+        The minimum cleaning commitment is one weekly visit of at least two hours. Teams are available 24/7/365 so service can land before open, after close, or overnight. Green cleaning supplies are part of the standard toolkit when facilities want lower-impact products.
+      </p>
+      <p>
+        This website is a private sales concept demo with original interface copy. Brand photography and final approved assets can replace placeholder imagery when ready.
+      </p>
+      <div class="btn-row">
+        <a routerLink="/quote" class="btn btn--navy">Get a Free Quote</a>
+        <a [href]="'tel:' + company.phoneTel" class="btn btn--ghost">Call {{ company.phoneDisplay }}</a>
+      </div>
+    </div>
+
+    <aside class="surface about-card">
+      <h3>New York location</h3>
+      <p>
+        {{ company.addressLine1 }}<br />
+        {{ company.addressLine2 }}
+      </p>
+      <p>
+        <strong>Phone:</strong> {{ company.phoneDisplay }}<br />
+        <strong>Office hours:</strong> {{ company.officeHours }}<br />
+        <strong>Service hours:</strong> {{ company.serviceHours }}
+      </p>
+      <p class="about-card__note">Demo site — no live bookings accepted here.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container pillar-grid">
+    @for (pillar of pillars; track pillar.title) {
+      <article class="surface pillar">
+        <h3>{{ pillar.title }}</h3>
+        <p>{{ pillar.text }}</p>
+      </article>
+    }
+  </div>
+</section>
