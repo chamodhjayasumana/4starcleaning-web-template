@@ -12,7 +12,7 @@
       <button type="button" class="btn btn--ghost btn--block" (click)="loadSample()">
         Load sample entry
       </button>
-      <p>Demo only — ZIP coverage is sample data. Nothing is emailed.</p>
+      <p>Demo only — sample ZIP coverage is illustrative. Nothing is emailed.</p>
     </aside>
 
     @if (step === 1) {
@@ -57,7 +57,7 @@
             autocomplete="postal-code"
           />
           @if (invalid('zipCode')) {
-            <span class="field-error">Enter a valid 5-digit ZIP code.</span>
+            <span class="field-error">Enter a 5-digit ZIP code.</span>
           }
         </div>
 
@@ -65,6 +65,7 @@
           <div class="coverage" [attr.data-status]="coverage.status" role="status">
             <strong>Sample coverage preview</strong>
             <p>{{ coverage.zip }} · {{ coverage.borough }} · {{ coverage.note }}</p>
+            <p class="coverage__note">Coverage unknown or limited? You can still continue this demo quote.</p>
           </div>
         }
 
@@ -73,11 +74,13 @@
           <select id="frequency" formControlName="frequency">
             <option value="" disabled>Select cleaning frequency</option>
             @for (option of frequencies; track option.value) {
-              <option [value]="option.value">{{ option.label }}</option>
+              <option [value]="option.value">
+                {{ option.label }}{{ option.hint ? ' — ' + option.hint : '' }}
+              </option>
             }
           </select>
           @if (invalid('frequency')) {
-            <span class="field-error">Choose a frequency.</span>
+            <span class="field-error">Choose a frequency (or “I’m not sure yet”).</span>
           }
         </div>
 
@@ -99,14 +102,25 @@
           </select>
         </div>
 
-        <button type="submit" class="btn btn--yellow btn--block">Continue</button>
+        <button type="submit" class="btn btn--green btn--block quote-actions">Continue</button>
       </form>
     }
 
     @if (step === 2) {
       <form class="quote-form" [formGroup]="stepTwoForm" (ngSubmit)="submit()" novalidate>
         <h2>Your contact details</h2>
-        <p class="summary">Quoting <strong>{{ selectedServiceName }}</strong> · ZIP {{ stepOneForm.controls.zipCode.value }}</p>
+
+        <div class="summary">
+          <div>
+            <strong>{{ selectedServiceName }}</strong>
+            <p>
+              {{ labelFor(buildingTypes, stepOneForm.controls.buildingType.value) }}
+              · ZIP {{ stepOneForm.controls.zipCode.value }}
+              · {{ labelFor(frequencies, stepOneForm.controls.frequency.value) }}
+            </p>
+          </div>
+          <button type="button" class="edit-link" (click)="backToStepOne()">Edit</button>
+        </div>
 
         <div class="form-field">
           <label for="firstName">First name</label>
@@ -151,7 +165,6 @@
           <input id="requestWalkthrough" type="checkbox" formControlName="requestWalkthrough" />
           <label for="requestWalkthrough">Request a walkthrough</label>
         </div>
-
         <div class="checkbox-row">
           <input id="acceptTerms" type="checkbox" formControlName="acceptTerms" />
           <label for="acceptTerms">
@@ -165,18 +178,21 @@
           <span class="field-error">Accept the demo privacy policy and terms to continue.</span>
         }
 
-        <div class="btn-row">
+        <div class="btn-row quote-actions">
           <button type="button" class="btn btn--ghost" (click)="backToStepOne()">Back</button>
-          <button type="submit" class="btn btn--yellow">Submit demo quote</button>
+          <button type="submit" class="btn btn--green">Submit Quote Request</button>
         </div>
       </form>
     }
 
     @if (step === 3 && confirmation) {
       <div class="confirmation" role="status">
-        <p class="badge">Demo confirmation — not a real booking</p>
-        <h1>Quote captured in this browser session</h1>
-        <p>Reference <strong>{{ confirmation.referenceId }}</strong>. No email was sent.</p>
+        <p class="badge">Demo confirmation</p>
+        <h1>Demo quote request complete</h1>
+        <p>
+          Reference <strong>{{ confirmation.referenceId }}</strong>. Your submission stayed in this
+          demo browser session — nothing was emailed or booked.
+        </p>
         <dl>
           <div><dt>Service</dt><dd>{{ labelFor(serviceOptions, confirmation.serviceId) }}</dd></div>
           <div><dt>Building</dt><dd>{{ labelFor(buildingTypes, confirmation.buildingType) }}</dd></div>
@@ -187,7 +203,7 @@
         </dl>
         <div class="btn-row">
           <button type="button" class="btn btn--ghost" (click)="startAnother()">Start another</button>
-          <a routerLink="/" class="btn btn--navy">Back to home</a>
+          <a routerLink="/" class="btn btn--green">Back to home</a>
         </div>
       </div>
     }

@@ -5,8 +5,8 @@
       <h1>{{ facility.name }}</h1>
       <p>{{ facility.summary }}</p>
       <div class="btn-row">
-        <a routerLink="/quote" class="btn btn--primary">Get a Free Quote</a>
-        <a routerLink="/facilities" class="btn btn--secondary">All facilities</a>
+        <button type="button" class="btn btn--green" (click)="startQuote()">Get a Free Quote</button>
+        <a routerLink="/facilities" class="btn btn--outline-light">All facilities</a>
       </div>
     </div>
   </section>
@@ -14,7 +14,7 @@
   <section class="section">
     <div class="container detail-grid">
       <div>
-        <h2>How we support this space</h2>
+        <h2>What’s included for this space</h2>
         <p>{{ facility.description }}</p>
         <ul class="check-list">
           @for (item of facility.highlights; track item) {
@@ -23,9 +23,13 @@
         </ul>
       </div>
       <aside class="surface detail-panel">
-        <h3>Next step</h3>
-        <p>Request a demo quote for a recurring commercial plan. Minimum one weekly visit of two hours.</p>
-        <a routerLink="/quote" class="btn btn--navy btn--block">Get a Free Quote</a>
+        <h3>Open a quote</h3>
+        <p>
+          Continues with building type <strong>{{ buildingType }}</strong> already selected for the demo form.
+        </p>
+        <button type="button" class="btn btn--green btn--block" (click)="startQuote()">
+          Get a Free Quote
+        </button>
       </aside>
     </div>
   </section>

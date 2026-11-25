@@ -106,9 +106,9 @@ Service names and quote options stay aligned via:
 | Demo | App | Local | Cloudflare Worker name |
 | --- | --- | --- | --- |
 | **A** (original) | `four-star-demo` | `npm start` → :4200 | `4starcleaning-web-template` |
-| **B** (alternate mockup) | `four-star-alt` | `npm run start:alt` → :4201 | `4starcleaning-web-template-v2` |
+| **2** (forest green / warm white) | `four-star-alt` | `npm run start:alt` → :4201 | `4starcleaning-web-template-v2` |
 
-Demo B lives in `projects/four-star-alt` with a diagonal navy hero, Poppins typography, yellow progress-bar quote form, and “Spaces we clean” cards — matching the fresh alternate design concept.
+Demo 2 lives in `projects/four-star-alt`: forest green `#17483B` + warm white `#F8F7F2`, DM Sans + Instrument Serif, hero quote starter (building type + ZIP), facility cards, daytime/evening/overnight scheduling, FAQs, and a 2-step quote with “I’m not sure yet” + Edit summary.
 
 ## Cloudflare deploy
 

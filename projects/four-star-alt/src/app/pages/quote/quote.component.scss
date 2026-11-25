@@ -1,6 +1,6 @@
 .quote-page {
-  padding: 1.75rem 0 3rem;
-  background: #fff;
+  padding: 1.75rem 0 3.5rem;
+  background: var(--warm);
 }
 
 .quote-page__inner {
@@ -8,8 +8,9 @@
 }
 
 .quote-page h1 {
-  font-size: clamp(1.9rem, 5vw, 2.5rem);
-  font-weight: 800;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.9rem, 5vw, 2.6rem);
   margin-bottom: 0.35rem;
 }
 
@@ -22,14 +23,14 @@
 .progress {
   height: 8px;
   border-radius: 999px;
-  background: #e8eef6;
+  background: #dde5e1;
   overflow: hidden;
   margin-bottom: 1.5rem;
 }
 
 .progress__bar {
   height: 100%;
-  background: var(--yellow);
+  background: var(--forest);
   border-radius: inherit;
   transition: width 0.25s ease;
 }
@@ -38,7 +39,7 @@
   margin-bottom: 1.25rem;
   padding: 1rem;
   border-radius: var(--radius-sm);
-  background: #f7f9fc;
+  background: #fff;
   border: 1px solid var(--line);
 }
 
@@ -53,28 +54,57 @@
 }
 
 .summary {
-  padding: 0.75rem 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-bottom: 1.1rem;
+  padding: 0.85rem 1rem;
   border-radius: 12px;
-  background: #fff8db;
-  color: var(--navy);
+  background: var(--pale);
+  color: var(--charcoal);
+}
+
+.summary p {
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
+}
+
+.edit-link {
+  border: 0;
+  background: transparent;
+  color: var(--forest);
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+  min-height: 44px;
 }
 
 .coverage {
   margin: 0 0 1rem;
   padding: 0.85rem 1rem;
   border-radius: 12px;
-  background: #f3f6fb;
+  background: #fff;
   border: 1px solid var(--line);
 }
 
 .coverage[data-status='covered'] {
-  background: #eaf7f0;
-  border-color: #b7e0c6;
+  background: var(--pale);
+  border-color: #b7cfc4;
 }
 
 .coverage p {
   margin: 0.3rem 0 0;
   font-size: 0.88rem;
+}
+
+.coverage__note {
+  font-size: 0.8rem !important;
+}
+
+.quote-actions {
+  margin-top: 0.5rem;
+  margin-bottom: calc(var(--sticky-h) + 0.75rem);
 }
 
 .confirmation dl {
@@ -93,11 +123,11 @@
 .confirmation dd {
   margin: 0.15rem 0 0;
   font-weight: 600;
-  color: var(--navy);
+  color: var(--charcoal);
 }
 
-@media (min-width: 720px) {
-  .quote-page__inner {
-    max-width: 640px;
+@media (min-width: 768px) {
+  .quote-actions {
+    margin-bottom: 0;
   }
 }

@@ -24,6 +24,7 @@ export const BUILDING_TYPES: BuildingTypeOption[] = [
 ];
 
 export const FREQUENCIES: FrequencyOption[] = [
+  { value: 'unsure', label: 'I’m not sure yet' },
   { value: '1x-week', label: '1× per week', hint: 'Minimum program' },
   { value: '2x-week', label: '2× per week' },
   { value: '3x-week', label: '3× per week' },
@@ -45,12 +46,27 @@ export const FACILITY_SIZES: FacilitySizeOption[] = [
 
 export const CLEANING_TIMES: CleaningTimeOption[] = [
   { value: '', label: 'No preference' },
-  { value: 'before-open', label: 'Before business hours' },
-  { value: 'during', label: 'During business hours' },
-  { value: 'after-close', label: 'After close / evening' },
+  { value: 'daytime', label: 'Daytime' },
+  { value: 'evening', label: 'Evening' },
   { value: 'overnight', label: 'Overnight' },
   { value: 'weekend', label: 'Weekend' },
 ];
+
+/** Map facility detail slugs → quote buildingType values. */
+export const FACILITY_BUILDING_TYPE: Record<string, string> = {
+  offices: 'office',
+  'small-offices': 'office',
+  'commercial-offices-buildings': 'office',
+  'computer-firms': 'office',
+  'retail-stores': 'retail',
+  'jewellery-stores': 'retail',
+  'medical-facilities': 'medical',
+  'dental-offices': 'medical',
+  spas: 'medical',
+  banks: 'bank',
+  schools: 'school',
+  'warehouses-factories': 'warehouse',
+};
 
 /** Sample entries for live sales demos — not real leads. */
 export const DEMO_SAMPLE_QUOTE = {

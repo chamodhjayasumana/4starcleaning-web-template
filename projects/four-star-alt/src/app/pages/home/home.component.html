@@ -1,69 +1,96 @@
 <section class="hero">
-  <div class="hero__panel">
+  <div class="hero__bg" aria-hidden="true">
+    <video
+      #heroVideoEl
+      class="hero__video"
+      [src]="heroVideo"
+      [poster]="heroPoster"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+    ></video>
+    <div class="hero__veil"></div>
+  </div>
+
+  <div class="container hero__grid">
     <div class="hero__copy">
-      <h1>Commercial cleaning for NYC businesses.</h1>
-      <div class="btn-row">
-        <a routerLink="/quote" class="btn btn--yellow">Get a Free Quote</a>
+      <h1>Commercial cleaning for NYC workplaces</h1>
+      <p>
+        Recurring cleaning for offices, retail stores, and medical facilities, with schedules built around your business hours.
+      </p>
+      <div class="btn-row hero__actions">
+        <a routerLink="/quote" class="btn btn--green">Get a Free Quote</a>
         <a routerLink="/services" class="btn btn--outline-light">Explore Services</a>
       </div>
     </div>
-  </div>
-  <div class="hero__media">
-    <img [src]="heroImage" alt="Professional cleaner maintaining a NYC office desk" width="1400" height="900" />
+
+    <form class="starter surface" [formGroup]="starterForm" (ngSubmit)="continueQuote()" novalidate>
+      <h2>Start your quote</h2>
+      <div class="form-field">
+        <label for="starterBuilding">Building type</label>
+        <select id="starterBuilding" formControlName="buildingType">
+          <option value="" disabled>Select building type</option>
+          @for (option of buildingTypes; track option.value) {
+            <option [value]="option.value">{{ option.label }}</option>
+          }
+        </select>
+        @if (invalid('buildingType')) {
+          <span class="field-error">Choose a building type.</span>
+        }
+      </div>
+      <div class="form-field">
+        <label for="starterZip">ZIP code</label>
+        <input
+          id="starterZip"
+          type="text"
+          inputmode="numeric"
+          maxlength="5"
+          autocomplete="postal-code"
+          formControlName="zipCode"
+          placeholder="e.g. 10010"
+        />
+        @if (invalid('zipCode')) {
+          <span class="field-error">Enter a 5-digit ZIP code.</span>
+        }
+      </div>
+      <button type="submit" class="btn btn--green btn--block">Continue</button>
+    </form>
   </div>
 </section>
 
-<section class="section services-band">
+<section class="section facilities">
   <div class="container">
-    <p class="eyebrow">Services</p>
-    <h2>Cleaning programs</h2>
-    <p class="lead">Open a quote with your service already selected.</p>
-    <div class="service-grid">
-      @for (service of services; track service.id) {
-        <article class="service-tile">
-          <h3>{{ service.name }}</h3>
-          <p>{{ service.tagline }}</p>
-          <div class="btn-row">
-            <a class="btn btn--ghost" [routerLink]="['/services', service.slug]">Learn more</a>
-            <a class="btn btn--navy" [routerLink]="['/quote']" [queryParams]="{ service: service.id }">
-              Get a Quote
-            </a>
+    <p class="eyebrow">Find your facility</p>
+    <h2>Do we clean your type of building?</h2>
+    <div class="facility-cards">
+      @for (facility of facilityCards; track facility.id) {
+        <a class="facility-card" [routerLink]="['/facilities', facility.slug]">
+          <img [src]="facility.image" [alt]="facility.imageAlt" loading="lazy" width="640" height="420" />
+          <div>
+            <h3>{{ facility.name }}</h3>
+            <p>{{ facility.summary }}</p>
           </div>
-        </article>
+        </a>
       }
     </div>
+    <a routerLink="/facilities" class="text-link">View all facilities</a>
   </div>
 </section>
 
-<section class="section facilities-band">
-  <div class="container facilities-band__inner">
-    <div>
-      <p class="eyebrow">Facilities we clean</p>
-      <h2>From corporate suites to clinics and storefronts</h2>
-      <p class="lead">
-        NYC banks, retail floors, medical offices, schools, warehouses, and more—cleaned on a recurring plan.
-      </p>
-      <a routerLink="/facilities" class="btn btn--yellow">See all facilities</a>
-    </div>
-    <ul class="facility-chips">
-      @for (facility of facilities; track facility.id) {
-        <li>
-          <a [routerLink]="['/facilities', facility.slug]">{{ facility.name }}</a>
-        </li>
-      }
-    </ul>
-  </div>
-</section>
-
-<section class="section awards-band">
+<section class="section hours">
   <div class="container">
-    <p class="eyebrow">Recognition</p>
-    <h2>Industry mentions (demo placeholders)</h2>
-    <div class="awards-grid">
-      @for (award of awards; track award.id) {
-        <article class="award-card">
-          <strong>{{ award.label }}</strong>
-          <p>{{ award.detail }}</p>
+    <p class="eyebrow">Scheduling</p>
+    <h2>Cleaning that fits your hours</h2>
+    <p class="lead">
+      Recurring programs run on a weekly minimum (two hours). Choose the window that protects your operations.
+    </p>
+    <div class="hours__grid">
+      @for (item of hours; track item.title) {
+        <article class="surface hours__card">
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.text }}</p>
         </article>
       }
     </div>
@@ -72,7 +99,8 @@
 
 <section class="section process">
   <div class="container">
-    <h2>How recurring cleaning works</h2>
+    <p class="eyebrow">How it works</p>
+    <h2>Three clear steps to a recurring plan</h2>
     <ol class="process__list">
       @for (step of steps; track step.title; let i = $index) {
         <li>
@@ -85,44 +113,52 @@
   </div>
 </section>
 
-<section class="section area-band">
-  <div class="container area-band__inner">
+<section class="section social-proof">
+  <div class="container social-proof__grid">
     <div>
-      <p class="eyebrow">Service area</p>
-      <h2>Manhattan and greater NYC</h2>
-      <p class="lead">
-        Borough notes plus a Manhattan ZIP sample list for quote coverage demos.
-      </p>
-      <a routerLink="/service-area" class="btn btn--navy">View service area</a>
+      <p class="eyebrow">Reviews</p>
+      <h2>What facilities managers say</h2>
+      <div class="review-stack">
+        @for (review of reviews; track review.id) {
+          <blockquote class="surface">
+            @if (review.placeholder) {
+              <p class="badge badge--muted">Placeholder</p>
+            }
+            <p>“{{ review.quote }}”</p>
+            <footer>
+              <strong>{{ review.author }}</strong>
+              <span>{{ review.role }}</span>
+            </footer>
+          </blockquote>
+        }
+      </div>
+      <a routerLink="/reviews" class="text-link">Read more reviews</a>
     </div>
-    <ul class="borough-list">
-      @for (borough of boroughs; track borough.id) {
-        <li><strong>{{ borough.name }}</strong> — {{ borough.summary }}</li>
-      }
-    </ul>
+
+    <div>
+      <p class="eyebrow">FAQs</p>
+      <h2>Practical answers</h2>
+      <div class="faq-list">
+        @for (faq of faqs; track faq.id) {
+          <details class="surface faq">
+            <summary>{{ faq.question }}</summary>
+            <p>{{ faq.answer }}</p>
+          </details>
+        }
+      </div>
+    </div>
   </div>
 </section>
 
-@if (offers.length) {
-  <section class="section offer">
-    <div class="container offer__panel">
-      <div>
-        <p class="eyebrow">Special offer</p>
-        <h2>{{ offers[0].discountLabel }} · {{ offers[0].title }}</h2>
-        <p>{{ offers[0].description }}</p>
-      </div>
-      <a routerLink="/special-offers" class="btn btn--yellow">View offers</a>
-    </div>
-  </section>
-}
-
-<section class="section cta">
-  <div class="container cta__panel">
-    <h2>Ready for a cleaner commercial space?</h2>
-    <p>Call {{ company.phoneDisplay }} or request a free quote. Demo submissions stay in memory only.</p>
+<section class="section final-cta">
+  <div class="container final-cta__panel">
+    <h2>Tell us about your space</h2>
+    <p>
+      Start a free quote for recurring commercial cleaning, or call {{ company.phoneDisplay }}.
+    </p>
     <div class="btn-row">
-      <a [href]="'tel:' + company.phoneTel" class="btn btn--outline-light">Call</a>
-      <a routerLink="/quote" class="btn btn--yellow">Get a Free Quote</a>
+      <a routerLink="/quote" class="btn btn--green">Get a Free Quote</a>
+      <a [href]="'tel:' + company.phoneTel" class="btn btn--outline-light">{{ company.phoneDisplay }}</a>
     </div>
   </div>
 </section>

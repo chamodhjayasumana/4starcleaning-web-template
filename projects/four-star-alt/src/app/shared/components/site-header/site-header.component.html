@@ -3,21 +3,85 @@
     <a routerLink="/" class="logo" (click)="close()" aria-label="Four Star General Cleaning Service home">
       <span class="logo__stars" aria-hidden="true">★★★★</span>
       <span class="logo__text">
-        <strong>FOUR STAR</strong>
-        <small>GENERAL CLEANING SERVICE</small>
+        <strong>Four Star</strong>
+        <small>General Cleaning Service</small>
       </span>
     </a>
 
     <nav class="nav" [class.nav--open]="menuOpen" aria-label="Primary">
-      @for (link of links; track link.path) {
-        <a [routerLink]="link.path" routerLinkActive="is-active" (click)="close()">{{ link.label }}</a>
-      }
-      <a routerLink="/articles" routerLinkActive="is-active" (click)="close()" class="nav__mobile-only">Articles</a>
-      <a routerLink="/special-offers" routerLinkActive="is-active" (click)="close()" class="nav__mobile-only">Offers</a>
-      <a routerLink="/quote" class="btn btn--yellow nav__mobile-cta" (click)="close()">Get a Free Quote</a>
+      <div
+        class="nav__item"
+        (mouseenter)="setOpen('services')"
+        (mouseleave)="setOpen(null)"
+      >
+        <button
+          type="button"
+          class="nav__trigger"
+          [attr.aria-expanded]="openMenu === 'services'"
+          (click)="toggleSection('services')"
+        >
+          Services <span aria-hidden="true">▾</span>
+        </button>
+        <div class="dropdown" [class.dropdown--open]="openMenu === 'services'">
+          @for (service of coreServices; track service.id) {
+            <a [routerLink]="['/services', service.slug]" (click)="close()">{{ service.name }}</a>
+          }
+          @for (service of specialtyServices; track service.id) {
+            @if (service.id === 'covid') {
+              <a [routerLink]="['/services', service.slug]" (click)="close()">{{ service.name }}</a>
+            }
+          }
+          <a routerLink="/services" (click)="close()">All Services</a>
+        </div>
+      </div>
+
+      <div
+        class="nav__item"
+        (mouseenter)="setOpen('facilities')"
+        (mouseleave)="setOpen(null)"
+      >
+        <button
+          type="button"
+          class="nav__trigger"
+          [attr.aria-expanded]="openMenu === 'facilities'"
+          (click)="toggleSection('facilities')"
+        >
+          Facilities <span aria-hidden="true">▾</span>
+        </button>
+        <div class="dropdown" [class.dropdown--open]="openMenu === 'facilities'">
+          @for (facility of facilities; track facility.id) {
+            <a [routerLink]="['/facilities', facility.slug]" (click)="close()">{{ facility.name }}</a>
+          }
+          <a routerLink="/facilities" (click)="close()">View all facilities</a>
+        </div>
+      </div>
+
+      <div
+        class="nav__item"
+        (mouseenter)="setOpen('about')"
+        (mouseleave)="setOpen(null)"
+      >
+        <button
+          type="button"
+          class="nav__trigger"
+          [attr.aria-expanded]="openMenu === 'about'"
+          (click)="toggleSection('about')"
+        >
+          About <span aria-hidden="true">▾</span>
+        </button>
+        <div class="dropdown" [class.dropdown--open]="openMenu === 'about'">
+          @for (link of aboutLinks; track link.path) {
+            <a [routerLink]="link.path" (click)="close()">{{ link.label }}</a>
+          }
+        </div>
+      </div>
+
+      <a routerLink="/reviews" routerLinkActive="is-active" (click)="close()">Reviews</a>
+      <a routerLink="/service-area" routerLinkActive="is-active" class="nav__mobile-only" (click)="close()">Service area</a>
+      <a routerLink="/quote" class="btn btn--green nav__mobile-cta" (click)="close()">Get a Free Quote</a>
     </nav>
 
-    <a routerLink="/quote" class="btn btn--yellow header__cta">Get a Free Quote</a>
+    <a routerLink="/quote" class="btn btn--green header__cta">Get a Free Quote</a>
 
     <button class="menu-btn" type="button" [attr.aria-expanded]="menuOpen" (click)="toggle()">
       <span class="sr-only">Menu</span>

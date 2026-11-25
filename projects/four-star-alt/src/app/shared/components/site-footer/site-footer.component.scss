@@ -1,6 +1,6 @@
 .footer {
-  background: var(--navy-deep);
-  color: rgba(255, 255, 255, 0.82);
+  background: var(--forest-deep);
+  color: rgba(248, 247, 242, 0.82);
   padding: 3rem 0 1.25rem;
 }
 
@@ -14,16 +14,12 @@
   gap: 0.6rem;
   align-items: center;
   margin-bottom: 0.85rem;
-}
-
-.stars {
-  color: var(--yellow);
+  color: #fff;
 }
 
 .footer__brand strong,
 .footer__brand small {
   display: block;
-  color: #fff;
 }
 
 .footer__brand strong {
@@ -33,10 +29,12 @@
 .footer__brand small {
   font-size: 0.62rem;
   letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.8;
 }
 
 .footer h3 {
-  color: var(--yellow);
+  color: #fff;
   font-size: 0.95rem;
 }
 
@@ -49,11 +47,12 @@
 }
 
 .footer a:hover {
-  color: var(--yellow);
+  color: #fff;
+  text-decoration: underline;
 }
 
 .footer p {
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(248, 247, 242, 0.72);
 }
 
 .footer__bottom {
@@ -65,7 +64,7 @@
 
 .footer__bottom p {
   margin: 0;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(248, 247, 242, 0.55);
 }
 
 @media (min-width: 860px) {

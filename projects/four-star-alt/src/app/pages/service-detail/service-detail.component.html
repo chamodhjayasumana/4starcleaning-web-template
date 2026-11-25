@@ -7,13 +7,13 @@
       <p>{{ service.tagline }}</p>
       <div class="btn-row">
         <a
-          class="btn btn--yellow"
+          class="btn btn--green"
           [routerLink]="['/quote']"
           [queryParams]="{ service: service.id }"
         >
           Get a Free Quote
         </a>
-        <a routerLink="/services" class="btn btn--ghost">All services</a>
+        <a routerLink="/services" class="btn btn--outline-light">All services</a>
       </div>
     </div>
   </section>
@@ -37,7 +37,7 @@
           }
         </ul>
         <a
-          class="btn btn--navy btn--block"
+          class="btn btn--green btn--block"
           [routerLink]="['/quote']"
           [queryParams]="{ service: service.id }"
         >

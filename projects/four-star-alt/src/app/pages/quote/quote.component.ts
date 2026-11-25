@@ -81,6 +81,7 @@ export class QuoteComponent implements OnInit {
     const serviceParam =
       this.route.snapshot.queryParamMap.get('service') ||
       this.route.snapshot.queryParamMap.get('serviceId');
+    const buildingParam = this.route.snapshot.queryParamMap.get('buildingType');
 
     if (serviceParam) {
       const fromCatalog =
@@ -91,6 +92,23 @@ export class QuoteComponent implements OnInit {
         this.stepOneForm.patchValue({ serviceId: id });
       }
     }
+
+    if (buildingParam && BUILDING_TYPES.some((b) => b.value === buildingParam)) {
+      this.quoteState.prefillBuildingType(buildingParam);
+      this.stepOneForm.patchValue({ buildingType: buildingParam });
+    }
+
+    // Re-apply saved starter values after query prefills
+    const latest = this.quoteState.getStepOne();
+    this.stepOneForm.patchValue({
+      serviceId: latest.serviceId || this.stepOneForm.controls.serviceId.value,
+      buildingType:
+        latest.buildingType || this.stepOneForm.controls.buildingType.value,
+      zipCode: latest.zipCode || this.stepOneForm.controls.zipCode.value,
+      frequency: latest.frequency || this.stepOneForm.controls.frequency.value,
+      facilitySize: latest.facilitySize,
+      preferredTime: latest.preferredTime,
+    });
 
     this.updateCoverage(this.stepOneForm.controls.zipCode.value);
 

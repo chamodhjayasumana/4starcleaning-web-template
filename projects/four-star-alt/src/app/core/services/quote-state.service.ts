@@ -50,6 +50,16 @@ export class QuoteStateService {
     }
   }
 
+  prefillBuildingType(buildingType: string): void {
+    if (buildingType) {
+      this.stepOne = { ...this.stepOne, buildingType };
+    }
+  }
+
+  prefillStarter(partial: Partial<QuoteStepOne>): void {
+    this.stepOne = { ...this.stepOne, ...partial };
+  }
+
   loadSample(stepOne: QuoteStepOne, stepTwo: QuoteStepTwo): void {
     this.stepOne = { ...stepOne };
     this.stepTwo = { ...stepTwo };

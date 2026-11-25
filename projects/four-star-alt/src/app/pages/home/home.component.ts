@@ -1,31 +1,104 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { AWARDS } from '../../core/data/awards.data';
+import { AfterViewInit, Component, ElementRef, ViewChild, inject } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 import { COMPANY } from '../../core/data/company.data';
+import { FAQS } from '../../core/data/faqs.data';
 import { FACILITIES } from '../../core/data/facilities.data';
-import { getVisibleOffers } from '../../core/data/offers.data';
-import { BOROUGHS } from '../../core/data/service-area.data';
-import { getCoreServices } from '../../core/data/services.data';
+import { BUILDING_TYPES } from '../../core/data/quote-options.data';
+import { REVIEWS } from '../../core/data/reviews.data';
+import { QuoteStateService } from '../../core/services/quote-state.service';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, ReactiveFormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent {
+export class HomeComponent implements AfterViewInit {
+  @ViewChild('heroVideoEl') heroVideoEl?: ElementRef<HTMLVideoElement>;
+
+  private readonly fb = inject(FormBuilder);
+  private readonly router = inject(Router);
+  private readonly quoteState = inject(QuoteStateService);
+
   readonly company = COMPANY;
-  readonly services = getCoreServices();
-  readonly facilities = FACILITIES.slice(0, 6);
-  readonly offers = getVisibleOffers();
-  readonly awards = AWARDS;
-  readonly boroughs = BOROUGHS;
-  readonly heroImage = '/images/hero-cleaner-nyc.jpg';
+  readonly buildingTypes = BUILDING_TYPES;
+  readonly reviews = REVIEWS.slice(0, 3);
+  readonly faqs = FAQS;
+
+  readonly heroVideo = '/videos/hero-cleaner.mp4';
+  readonly heroPoster =
+    'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1400&q=80';
+
+  readonly facilityCards = [
+    FACILITIES.find((f) => f.slug === 'offices')!,
+    FACILITIES.find((f) => f.slug === 'retail-stores')!,
+    FACILITIES.find((f) => f.slug === 'medical-facilities')!,
+  ];
+
+  readonly hours = [
+    {
+      title: 'Daytime',
+      text: 'Clean while teams are in—or between shifts—when your building allows it.',
+    },
+    {
+      title: 'Evening',
+      text: 'After-close service so offices and stores open to a ready floor.',
+    },
+    {
+      title: 'Overnight',
+      text: 'Quiet overnight windows for larger floors and multi-tenant buildings.',
+    },
+  ];
 
   readonly steps = [
-    { title: 'Request a quote', text: 'Share your service, building type, ZIP, and frequency.' },
-    { title: 'Discuss your needs', text: 'Optional walkthrough to refine scope and access.' },
-    { title: 'Agree on a schedule', text: 'Recurring visits—minimum one two-hour clean per week.' },
+    {
+      title: 'Tell us about your space',
+      text: 'Share building type, ZIP, and how often you need cleaning.',
+    },
+    {
+      title: 'Discuss your cleaning needs',
+      text: 'We review access, restrooms, and optional walkthrough notes.',
+    },
+    {
+      title: 'Agree on a recurring schedule',
+      text: 'Lock daytime, evening, or overnight visits—minimum one weekly visit.',
+    },
   ];
+
+  starterForm = this.fb.nonNullable.group({
+    buildingType: ['', Validators.required],
+    zipCode: ['', [Validators.required, Validators.pattern(/^\d{5}$/)]],
+  });
+
+  ngAfterViewInit(): void {
+    const video = this.heroVideoEl?.nativeElement;
+    if (!video) {
+      return;
+    }
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) {
+      video.pause();
+      video.removeAttribute('autoplay');
+    }
+  }
+
+  continueQuote(): void {
+    this.starterForm.markAllAsTouched();
+    if (this.starterForm.invalid) {
+      return;
+    }
+    const value = this.starterForm.getRawValue();
+    this.quoteState.prefillStarter({
+      buildingType: value.buildingType,
+      zipCode: value.zipCode.trim(),
+    });
+    void this.router.navigate(['/quote']);
+  }
+
+  invalid(control: 'buildingType' | 'zipCode'): boolean {
+    const c = this.starterForm.controls[control];
+    return c.invalid && c.touched;
+  }
 }

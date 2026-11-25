@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { COMPANY } from '../../../core/data/company.data';
-import { SERVICES } from '../../../core/data/services.data';
+import { getCoreServices } from '../../../core/data/services.data';
 import { DemoBadgeComponent } from '../demo-badge/demo-badge.component';
 
 @Component({
@@ -13,6 +13,6 @@ import { DemoBadgeComponent } from '../demo-badge/demo-badge.component';
 })
 export class SiteFooterComponent {
   readonly company = COMPANY;
-  readonly services = SERVICES;
+  readonly services = getCoreServices();
   readonly year = new Date().getFullYear();
 }

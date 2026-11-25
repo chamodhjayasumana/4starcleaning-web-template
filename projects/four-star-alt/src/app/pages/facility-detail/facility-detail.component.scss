@@ -4,7 +4,7 @@
   display: flex;
   align-items: flex-end;
   background:
-    linear-gradient(120deg, rgba(7, 17, 31, 0.9), rgba(7, 17, 31, 0.35)),
+    linear-gradient(120deg, rgba(15, 50, 41, 0.92), rgba(23, 72, 59, 0.45)),
     var(--img) center / cover no-repeat;
   color: #fff;
 }
@@ -18,11 +18,13 @@
 
 .detail-hero h1 {
   color: #fff;
+  font-family: var(--font-display);
+  font-weight: 400;
   font-size: clamp(2rem, 5vw, 2.8rem);
 }
 
 .detail-hero p {
-  color: rgba(255, 255, 255, 0.86);
+  color: rgba(248, 247, 242, 0.86);
 }
 
 .detail-grid {

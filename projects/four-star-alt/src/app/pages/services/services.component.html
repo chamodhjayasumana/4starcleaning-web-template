@@ -5,7 +5,7 @@
     <p class="lead">
       Office, janitorial, retail, medical, and green cleaning—each available as a recurring plan with quote preselection.
     </p>
-    <a routerLink="/quote" class="btn btn--navy">Get a Free Quote</a>
+    <a routerLink="/quote" class="btn btn--green">Get a Free Quote</a>
   </div>
 </section>
 
@@ -25,7 +25,7 @@
             <p>{{ service.summary }}</p>
             <div class="btn-row">
               <a class="btn btn--ghost" [routerLink]="['/services', service.slug]">Learn more</a>
-              <a class="btn btn--navy" [routerLink]="['/quote']" [queryParams]="{ service: service.id }">
+              <a class="btn btn--green" [routerLink]="['/quote']" [queryParams]="{ service: service.id }">
                 Get a Quote
               </a>
             </div>
@@ -53,7 +53,7 @@
             <p>{{ service.summary }}</p>
             <div class="btn-row">
               <a class="btn btn--ghost" [routerLink]="['/services', service.slug]">Learn more</a>
-              <a class="btn btn--navy" [routerLink]="['/quote']" [queryParams]="{ service: service.id }">
+              <a class="btn btn--green" [routerLink]="['/quote']" [queryParams]="{ service: service.id }">
                 Get a Quote
               </a>
             </div>
