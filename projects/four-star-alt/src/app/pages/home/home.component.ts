@@ -1,4 +1,11 @@
-import { AfterViewInit, Component, ElementRef, ViewChild, inject } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { COMPANY } from '../../core/data/company.data';
@@ -21,13 +28,18 @@ export class HomeComponent implements AfterViewInit {
   private readonly fb = inject(FormBuilder);
   private readonly router = inject(Router);
   private readonly quoteState = inject(QuoteStateService);
+  private readonly cdr = inject(ChangeDetectorRef);
 
   readonly company = COMPANY;
   readonly buildingTypes = BUILDING_TYPES;
   readonly reviews = REVIEWS.slice(0, 3);
   readonly faqs = FAQS;
 
-  readonly heroVideo = '/videos/hero-cleaner.mp4';
+  /** Prefer local asset; CDN fallback if Cloudflare omits/blocks the mp4. */
+  readonly heroVideoLocal = '/videos/hero-cleaner.mp4';
+  readonly heroVideoFallback =
+    'https://cdn.jsdelivr.net/gh/chamodhjayasumana/4starcleaning-web-template@master/projects/four-star-alt/public/videos/hero-cleaner.mp4';
+  heroVideoSrc = this.heroVideoLocal;
   readonly heroPoster =
     'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1400&q=80';
 
@@ -77,11 +89,49 @@ export class HomeComponent implements AfterViewInit {
     if (!video) {
       return;
     }
+
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduceMotion) {
       video.pause();
       video.removeAttribute('autoplay');
+      return;
     }
+
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.setAttribute('playsinline', '');
+    video.setAttribute('webkit-playsinline', '');
+
+    const applySrc = (src: string) => {
+      this.heroVideoSrc = src;
+      video.src = src;
+      this.cdr.detectChanges();
+      video.load();
+      void video.play().catch(() => undefined);
+    };
+
+    video.addEventListener(
+      'error',
+      () => {
+        if (this.heroVideoSrc !== this.heroVideoFallback) {
+          applySrc(this.heroVideoFallback);
+        }
+      },
+      { once: true }
+    );
+
+    // Probe local asset; if Cloudflare SPA fallback returns HTML, switch to CDN.
+    void fetch(this.heroVideoLocal, { method: 'GET', headers: { Range: 'bytes=0-1' } })
+      .then(async (res) => {
+        const type = res.headers.get('content-type') || '';
+        if (!res.ok || type.includes('text/html')) {
+          applySrc(this.heroVideoFallback);
+          return;
+        }
+        applySrc(this.heroVideoLocal);
+      })
+      .catch(() => applySrc(this.heroVideoFallback));
   }
 
   continueQuote(): void {

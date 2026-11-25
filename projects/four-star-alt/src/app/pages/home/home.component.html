@@ -3,13 +3,14 @@
     <video
       #heroVideoEl
       class="hero__video"
-      [src]="heroVideo"
+      [attr.src]="heroVideoSrc"
       [poster]="heroPoster"
       autoplay
       muted
       loop
       playsinline
-      preload="metadata"
+      webkit-playsinline
+      preload="auto"
     ></video>
     <div class="hero__veil"></div>
   </div>
