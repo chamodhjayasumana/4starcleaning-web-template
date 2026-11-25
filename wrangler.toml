@@ -5,4 +5,3 @@ compatibility_date = "2025-11-01"
 [assets]
 directory = "./dist/four-star-demo/browser"
 not_found_handling = "single-page-application"
-binding = "ASSETS"
