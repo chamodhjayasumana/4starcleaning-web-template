@@ -93,4 +93,24 @@ Service names and quote options stay aligned via:
 | --- | --- |
 | `npm start` | Dev server on port 4200 |
 | `npm run build` | Production build |
+| `npm run deploy` | Build + Cloudflare Workers static deploy |
+| `npm run preview` | Build + local Wrangler preview |
 | `npm test` | Unit tests (Karma; optional) |
+
+## Cloudflare deploy
+
+This app is a static Angular SPA. `wrangler.toml` points assets at `dist/four-star-demo/browser` with SPA fallback for Angular routes.
+
+In the Cloudflare “Create an app” form:
+
+| Field | Value |
+| --- | --- |
+| Build command | `npm run build` |
+| Deploy command | `npx wrangler deploy` |
+| Preview command | `npx wrangler versions upload` |
+
+Or deploy from your machine after `npm install`:
+
+```bash
+npm run deploy
+```
