@@ -14,11 +14,12 @@ import { FACILITIES } from '../../core/data/facilities.data';
 import { BUILDING_TYPES } from '../../core/data/quote-options.data';
 import { REVIEWS } from '../../core/data/reviews.data';
 import { QuoteStateService } from '../../core/services/quote-state.service';
+import { RevealDirective } from '../../shared/directives/reveal.directive';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink, ReactiveFormsModule],
+  imports: [RouterLink, ReactiveFormsModule, RevealDirective],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })

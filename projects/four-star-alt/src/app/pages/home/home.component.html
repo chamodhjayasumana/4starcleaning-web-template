@@ -27,7 +27,7 @@
       </div>
     </div>
 
-    <form class="starter surface" [formGroup]="starterForm" (ngSubmit)="continueQuote()" novalidate>
+    <form class="starter surface starter--glass" [formGroup]="starterForm" (ngSubmit)="continueQuote()" novalidate>
       <h2>Start your quote</h2>
       <div class="form-field">
         <label for="starterBuilding">Building type</label>
@@ -63,33 +63,47 @@
 
 <section class="section facilities">
   <div class="container">
-    <p class="eyebrow">Find your facility</p>
-    <h2>Do we clean your type of building?</h2>
-    <div class="facility-cards">
-      @for (facility of facilityCards; track facility.id) {
-        <a class="facility-card" [routerLink]="['/facilities', facility.slug]">
-          <img [src]="facility.image" [alt]="facility.imageAlt" loading="lazy" width="640" height="420" />
-          <div>
+    <header class="section-head" appReveal>
+      <p class="eyebrow">Find your facility</p>
+      <h2>Spaces we keep spotless</h2>
+      <p class="lead">Image-forward facility types—tap through for what’s included.</p>
+    </header>
+
+    <div class="facility-rail">
+      @for (facility of facilityCards; track facility.id; let i = $index) {
+        <a
+          class="facility-card"
+          [routerLink]="['/facilities', facility.slug]"
+          appReveal
+          [style.--delay]="i * 90 + 'ms'"
+        >
+          <img [src]="facility.image" [alt]="facility.imageAlt" loading="lazy" width="720" height="900" />
+          <div class="facility-card__overlay">
+            <span class="facility-card__index">0{{ i + 1 }}</span>
             <h3>{{ facility.name }}</h3>
             <p>{{ facility.summary }}</p>
+            <span class="facility-card__cta">Explore</span>
           </div>
         </a>
       }
     </div>
-    <a routerLink="/facilities" class="text-link">View all facilities</a>
+    <a routerLink="/facilities" class="text-link" appReveal>View all facilities</a>
   </div>
 </section>
 
 <section class="section hours">
-  <div class="container">
-    <p class="eyebrow">Scheduling</p>
-    <h2>Cleaning that fits your hours</h2>
-    <p class="lead">
-      Recurring programs run on a weekly minimum (two hours). Choose the window that protects your operations.
-    </p>
+  <div class="container hours__layout">
+    <header class="section-head hours__intro" appReveal>
+      <p class="eyebrow">Scheduling</p>
+      <h2>Cleaning that moves with your day</h2>
+      <p class="lead">
+        Recurring programs run on a weekly minimum (two hours). Pick the window that protects your operations.
+      </p>
+    </header>
     <div class="hours__grid">
-      @for (item of hours; track item.title) {
-        <article class="surface hours__card">
+      @for (item of hours; track item.title; let i = $index) {
+        <article class="hours__card" appReveal [style.--delay]="i * 80 + 'ms'">
+          <span class="hours__mark" aria-hidden="true"></span>
           <h3>{{ item.title }}</h3>
           <p>{{ item.text }}</p>
         </article>
@@ -100,14 +114,18 @@
 
 <section class="section process">
   <div class="container">
-    <p class="eyebrow">How it works</p>
-    <h2>Three clear steps to a recurring plan</h2>
-    <ol class="process__list">
+    <header class="section-head" appReveal>
+      <p class="eyebrow">How it works</p>
+      <h2>Three steps. One recurring plan.</h2>
+    </header>
+    <ol class="process__track">
       @for (step of steps; track step.title; let i = $index) {
-        <li>
-          <span>{{ i + 1 }}</span>
-          <h3>{{ step.title }}</h3>
-          <p>{{ step.text }}</p>
+        <li class="process__step" appReveal [style.--delay]="i * 100 + 'ms'">
+          <span class="process__num">{{ i + 1 }}</span>
+          <div>
+            <h3>{{ step.title }}</h3>
+            <p>{{ step.text }}</p>
+          </div>
         </li>
       }
     </ol>
@@ -116,16 +134,16 @@
 
 <section class="section social-proof">
   <div class="container social-proof__grid">
-    <div>
+    <div appReveal>
       <p class="eyebrow">Reviews</p>
-      <h2>What facilities managers say</h2>
+      <h2>Trusted by facility teams</h2>
       <div class="review-stack">
-        @for (review of reviews; track review.id) {
-          <blockquote class="surface">
+        @for (review of reviews; track review.id; let i = $index) {
+          <blockquote class="review" [style.--delay]="i * 70 + 'ms'" appReveal>
             @if (review.placeholder) {
               <p class="badge badge--muted">Placeholder</p>
             }
-            <p>“{{ review.quote }}”</p>
+            <p class="review__quote">“{{ review.quote }}”</p>
             <footer>
               <strong>{{ review.author }}</strong>
               <span>{{ review.role }}</span>
@@ -136,12 +154,12 @@
       <a routerLink="/reviews" class="text-link">Read more reviews</a>
     </div>
 
-    <div>
+    <div appReveal>
       <p class="eyebrow">FAQs</p>
-      <h2>Practical answers</h2>
+      <h2>Straight answers</h2>
       <div class="faq-list">
         @for (faq of faqs; track faq.id) {
-          <details class="surface faq">
+          <details class="faq">
             <summary>{{ faq.question }}</summary>
             <p>{{ faq.answer }}</p>
           </details>
@@ -152,14 +170,17 @@
 </section>
 
 <section class="section final-cta">
-  <div class="container final-cta__panel">
-    <h2>Tell us about your space</h2>
-    <p>
-      Start a free quote for recurring commercial cleaning, or call {{ company.phoneDisplay }}.
-    </p>
-    <div class="btn-row">
-      <a routerLink="/quote" class="btn btn--cyan">Get a Free Quote</a>
-      <a [href]="'tel:' + company.phoneTel" class="btn btn--outline-light">{{ company.phoneDisplay }}</a>
+  <div class="final-cta__bleed" appReveal>
+    <div class="container final-cta__panel">
+      <p class="eyebrow eyebrow--light">Next step</p>
+      <h2>Tell us about your space</h2>
+      <p>
+        Start a free quote for recurring commercial cleaning, or call {{ company.phoneDisplay }}.
+      </p>
+      <div class="btn-row">
+        <a routerLink="/quote" class="btn btn--cyan">Get a Free Quote</a>
+        <a [href]="'tel:' + company.phoneTel" class="btn btn--outline-light">{{ company.phoneDisplay }}</a>
+      </div>
     </div>
   </div>
 </section>
